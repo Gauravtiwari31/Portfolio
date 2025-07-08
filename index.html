@@ -12,7 +12,7 @@
                 extend: {
                     colors: {
                         'deep-blue': '#1a1b2f',
-                        'neon-red': '#ff2d55',
+                        'neon-cyan': '#00f0ff',
                         'electric-purple': '#7d12ff',
                         'hot-pink': '#ff2d75'
                     }
@@ -32,7 +32,7 @@
             background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2a 50%, #2a0a3a 100%);
         }
         
-        /* Cursor Line Trail Effect */
+        /* Cursor Smoke/Gas Trail Effect */
         #cursor-trail {
             position: fixed;
             top: 0;
@@ -44,32 +44,34 @@
             overflow: hidden;
         }
         
-        .cursor-line {
+        .cursor-particle {
             position: absolute;
-            height: 2px;
-            background: linear-gradient(90deg, rgba(255,45,85,0.8), rgba(255,45,85,0));
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,240,255,0.8) 0%, rgba(125,18,255,0.4) 70%, transparent 100%);
             pointer-events: none;
-            transform-origin: left center;
-            animation: line-fade 2s forwards;
-            filter: blur(1px);
+            transform: translate(-50%, -50%);
+            filter: blur(2px);
+            animation: particle-fade 1.5s forwards;
             mix-blend-mode: screen;
         }
         
-        @keyframes line-fade {
+        @keyframes particle-fade {
             0% {
                 opacity: 1;
-                transform: scaleX(1);
+                transform: translate(-50%, -50%) scale(1);
             }
             100% {
                 opacity: 0;
-                transform: scaleX(0);
+                transform: translate(-50%, -50%) scale(3);
             }
         }
         
         /* Floating geometric shapes */
         .floating-shape {
             position: absolute;
-            background: linear-gradient(45deg, rgba(255,45,85,0.2), rgba(125,18,255,0.2));
+            background: linear-gradient(45deg, rgba(0,240,255,0.2), rgba(125,18,255,0.2));
             border-radius: 20px;
             filter: blur(1px);
             animation: floatShape 20s infinite ease-in-out;
@@ -84,24 +86,24 @@
         
         .card-hover {
             transition: all 0.4s ease;
-            border: 1px solid rgba(255,45,85,0.2);
+            border: 1px solid rgba(0,240,255,0.2);
         }
         .card-hover:hover {
             transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(255,45,85,0.4);
-            border-color: rgba(255,45,85,0.5);
+            box-shadow: 0 25px 50px -12px rgba(0,240,255,0.4);
+            border-color: rgba(0,240,255,0.5);
         }
         .dark .card-hover:hover {
-            box-shadow: 0 25px 50px -12px rgba(255,45,85,0.6);
+            box-shadow: 0 25px 50px -12px rgba(0,240,255,0.6);
         }
         
         .skill-tag {
             transition: all 0.3s ease;
-            border: 1px solid rgba(255,45,85,0.3);
+            border: 1px solid rgba(0,240,255,0.3);
         }
         .skill-tag:hover {
             transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(255,45,85,0.4);
+            box-shadow: 0 5px 15px rgba(0,240,255,0.4);
         }
         
         .theme-transition {
@@ -109,8 +111,8 @@
         }
         
         /* Enhanced glow effects */
-        .glow-red {
-            box-shadow: 0 0 20px rgba(255,45,85,0.5);
+        .glow-cyan {
+            box-shadow: 0 0 20px rgba(0,240,255,0.5);
         }
         
         .glow-purple {
@@ -124,21 +126,21 @@
         }
         
         /* Brighter colors for better contrast */
-        .text-neon-red { color: #ff2d55; }
+        .text-neon-cyan { color: #00f0ff; }
         .text-electric-purple { color: #7d12ff; }
-        .bg-neon-red { background-color: #ff2d55; }
+        .bg-neon-cyan { background-color: #00f0ff; }
         .bg-electric-purple { background-color: #7d12ff; }
         
         /* Enhanced navigation */
         nav {
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,45,85,0.2);
+            border-bottom: 1px solid rgba(0,240,255,0.2);
         }
         
         /* Animated background patterns */
         .animated-bg {
             background-image: 
-                radial-gradient(circle at 20% 30%, rgba(255,45,85,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 20% 30%, rgba(0,240,255,0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(125,18,255,0.1) 0%, transparent 50%);
             animation: bgShift 10s ease-in-out infinite;
         }
@@ -161,7 +163,7 @@
             left: -100%;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #ff2d55, #7d12ff, #ff2d55, transparent);
+            background: linear-gradient(90deg, transparent, #00f0ff, #7d12ff, #00f0ff, transparent);
             animation: borderSlide 3s linear infinite;
         }
         
@@ -179,14 +181,14 @@
     <nav class="fixed top-0 w-full bg-deep-blue/80 dark:bg-black/80 backdrop-blur-md z-50 shadow-lg cyber-border">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
-                <h1 class="text-2xl font-bold text-neon-red glow-red">GT</h1>
+                <h1 class="text-2xl font-bold text-neon-cyan glow-cyan">GT</h1>
                 <div class="flex items-center space-x-6">
-                    <a href="#about" class="hover:text-neon-red transition-colors">About</a>
-                    <a href="#projects" class="hover:text-neon-red transition-colors">Projects</a>
-                    <a href="#skills" class="hover:text-neon-red transition-colors">Skills</a>
-                    <a href="#experience" class="hover:text-neon-red transition-colors">Experience</a>
-                    <a href="#contact" class="hover:text-neon-red transition-colors">Contact</a>
-                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors glow-red">
+                    <a href="#about" class="hover:text-neon-cyan transition-colors">About</a>
+                    <a href="#projects" class="hover:text-neon-cyan transition-colors">Projects</a>
+                    <a href="#skills" class="hover:text-neon-cyan transition-colors">Skills</a>
+                    <a href="#experience" class="hover:text-neon-cyan transition-colors">Experience</a>
+                    <a href="#contact" class="hover:text-neon-cyan transition-colors">Contact</a>
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors glow-cyan">
                         <i class="fas fa-sun text-yellow-400 dark:hidden"></i>
                         <i class="fas fa-moon text-blue-400 hidden dark:block"></i>
                     </button>
@@ -207,12 +209,12 @@
         
         <div class="container mx-auto px-4 text-center content-layer">
             <div class="animate-fade-in">
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 glow-red">Gaurav Tiwari</h1>
-                <p class="text-xl md:text-2xl mb-8 opacity-90 text-neon-red">Electronics Engineering Student & AI Enthusiast</p>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 glow-cyan">Gaurav Tiwari</h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 text-neon-cyan">Electronics Engineering Student & AI Enthusiast</p>
                 <p class="text-lg mb-8 opacity-80">Rajiv Gandhi Institute of Petroleum Technology</p>
                 <div class="flex justify-center space-x-4 mb-8">
                     <a href="https://www.linkedin.com/in/gaurav-tiwari-66012831b/" target="_blank" 
-                       class="bg-white/20 hover:bg-neon-red/30 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 glow-red">
+                       class="bg-white/20 hover:bg-neon-cyan/30 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 glow-cyan">
                         <i class="fab fa-linkedin mr-2"></i>LinkedIn
                     </a>
                     <a href="https://github.com/Gauravtiwari31" target="_blank" 
@@ -221,7 +223,7 @@
                     </a>
                 </div>
                 <a href="#about" class="inline-block animate-bounce">
-                    <i class="fas fa-chevron-down text-2xl text-neon-red"></i>
+                    <i class="fas fa-chevron-down text-2xl text-neon-cyan"></i>
                 </a>
             </div>
         </div>
@@ -230,7 +232,7 @@
     <!-- About Section -->
     <section id="about" class="py-20 bg-gray-800 dark:bg-gray-900 animated-bg">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 text-neon-red glow-red">About Me</h2>
+            <h2 class="text-4xl font-bold text-center mb-12 text-neon-cyan glow-cyan">About Me</h2>
             <div class="max-w-4xl mx-auto">
                 <div class="bg-gray-700/50 dark:bg-gray-800/50 rounded-lg p-8 card-hover backdrop-blur-sm">
                     <p class="text-lg leading-relaxed mb-6 text-gray-200">
@@ -241,14 +243,14 @@
                     </p>
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
-                            <h3 class="text-xl font-semibold mb-3 text-neon-red">Education</h3>
+                            <h3 class="text-xl font-semibold mb-3 text-neon-cyan">Education</h3>
                             <div class="space-y-3">
-                                <div class="border-l-4 border-neon-red pl-4">
+                                <div class="border-l-4 border-neon-cyan pl-4">
                                     <h4 class="font-semibold text-white">B.Tech Electronics Engineering</h4>
                                     <p class="text-gray-300">Rajiv Gandhi Institute of Petroleum Technology</p>
                                     <p class="text-sm text-gray-400">Aug 2024 - Present</p>
                                 </div>
-                                <div class="border-l-4 border-neon-red pl-4">
+                                <div class="border-l-4 border-neon-cyan pl-4">
                                     <h4 class="font-semibold text-white">Higher Secondary</h4>
                                     <p class="text-gray-300">M V Convent Inter College</p>
                                     <p class="text-sm text-gray-400">Apr 2022 - March 2023</p>
@@ -256,7 +258,7 @@
                             </div>
                         </div>
                         <div>
-                            <h3 class="text-xl font-semibold mb-3 text-neon-red">Contact Info</h3>
+                            <h3 class="text-xl font-semibold mb-3 text-neon-cyan">Contact Info</h3>
                             <div class="space-y-2 text-gray-200">
                                 <p><i class="fas fa-map-marker-alt text-electric-purple mr-2"></i>Sultanpur, Uttar Pradesh</p>
                                 <p><i class="fas fa-phone text-electric-purple mr-2"></i>+91-9580561706</p>
@@ -272,7 +274,7 @@
     <!-- Projects Section -->
     <section id="projects" class="py-20 bg-gray-900 dark:bg-black animated-bg">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 text-neon-red glow-red">Projects</h2>
+            <h2 class="text-4xl font-bold text-center mb-12 text-neon-cyan glow-cyan">Projects</h2>
             <div class="max-w-4xl mx-auto">
                 <div class="bg-gray-700/50 dark:bg-gray-800/50 rounded-lg p-8 card-hover shadow-lg backdrop-blur-sm">
                     <div class="flex items-center mb-4">
@@ -281,29 +283,29 @@
                     </div>
                     <p class="text-gray-300 mb-4">March 2025</p>
                     <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="skill-tag bg-red-900/50 text-neon-red px-3 py-1 rounded-full text-sm">Flask</span>
-                        <span class="skill-tag bg-red-900/50 text-neon-red px-3 py-1 rounded-full text-sm">MySQL</span>
-                        <span class="skill-tag bg-red-900/50 text-neon-red px-3 py-1 rounded-full text-sm">HTML</span>
-                        <span class="skill-tag bg-red-900/50 text-neon-red px-3 py-1 rounded-full text-sm">CSS</span>
-                        <span class="skill-tag bg-red-900/50 text-neon-red px-3 py-1 rounded-full text-sm">JavaScript</span>
+                        <span class="skill-tag bg-cyan-900/50 text-neon-cyan px-3 py-1 rounded-full text-sm">Flask</span>
+                        <span class="skill-tag bg-cyan-900/50 text-neon-cyan px-3 py-1 rounded-full text-sm">MySQL</span>
+                        <span class="skill-tag bg-cyan-900/50 text-neon-cyan px-3 py-1 rounded-full text-sm">HTML</span>
+                        <span class="skill-tag bg-cyan-900/50 text-neon-cyan px-3 py-1 rounded-full text-sm">CSS</span>
+                        <span class="skill-tag bg-cyan-900/50 text-neon-cyan px-3 py-1 rounded-full text-sm">JavaScript</span>
                     </div>
                     <div class="space-y-4">
                         <div class="flex items-start">
-                            <i class="fas fa-desktop text-neon-red mt-1 mr-3"></i>
+                            <i class="fas fa-desktop text-neon-cyan mt-1 mr-3"></i>
                             <div>
                                 <h4 class="font-semibold mb-1 text-white">Frontend Implementation</h4>
                                 <p class="text-gray-300">Designed an interactive UI enabling users to input handwritten mathematical expressions via a drawing canvas or image upload, incorporating real-time stroke handling and image preprocessing for seamless submission.</p>
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <i class="fas fa-server text-neon-red mt-1 mr-3"></i>
+                            <i class="fas fa-server text-neon-cyan mt-1 mr-3"></i>
                             <div>
                                 <h4 class="font-semibold mb-1 text-white">Backend Integration</h4>
                                 <p class="text-gray-300">Established API communication between the frontend and AI model, handling asynchronous requests for expression recognition and solution retrieval, ensuring efficient data exchange and dynamic result rendering.</p>
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <i class="fas fa-user-check text-neon-red mt-1 mr-3"></i>
+                            <i class="fas fa-user-check text-neon-cyan mt-1 mr-3"></i>
                             <div>
                                 <h4 class="font-semibold mb-1 text-white">User Experience Enhancements</h4>
                                 <p class="text-gray-300">Implemented real-time visual feedback, robust error handling, and adaptive rendering for complex solutions, optimizing readability and interaction.</p>
@@ -318,7 +320,7 @@
     <!-- Skills Section -->
     <section id="skills" class="py-20 bg-gray-800 dark:bg-gray-900 animated-bg">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 text-neon-red glow-red">Technical Skills</h2>
+            <h2 class="text-4xl font-bold text-center mb-12 text-neon-cyan glow-cyan">Technical Skills</h2>
             <div class="max-w-6xl mx-auto">
                 <div class="grid md:grid-cols-2 gap-8">
                     <!-- Learned Skills -->
@@ -390,7 +392,7 @@
     <!-- Experience Section -->
     <section id="experience" class="py-20 bg-gray-900 dark:bg-black animated-bg">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 text-neon-red glow-red">Leadership & Experience</h2>
+            <h2 class="text-4xl font-bold text-center mb-12 text-neon-cyan glow-cyan">Leadership & Experience</h2>
             <div class="max-w-4xl mx-auto">
                 <div class="space-y-6">
                     <div class="bg-gray-700/50 dark:bg-gray-800/50 rounded-lg p-6 card-hover shadow-lg backdrop-blur-sm">
@@ -402,8 +404,8 @@
                             </div>
                         </div>
                         <div class="flex justify-between items-center">
-                            <p class="text-neon-red font-semibold">Rajiv Gandhi Institute Of Petroleum Technology</p>
-                            <span class="bg-red-900/50 text-neon-red px-3 py-1 rounded-full text-sm">March 2025 - Present</span>
+                            <p class="text-neon-cyan font-semibold">Rajiv Gandhi Institute Of Petroleum Technology</p>
+                            <span class="bg-cyan-900/50 text-neon-cyan px-3 py-1 rounded-full text-sm">March 2025 - Present</span>
                         </div>
                     </div>
 
@@ -416,8 +418,8 @@
                             </div>
                         </div>
                         <div class="flex justify-between items-center">
-                            <p class="text-neon-red font-semibold">Energia'25</p>
-                            <span class="bg-red-900/50 text-neon-red px-3 py-1 rounded-full text-sm">March 2025</span>
+                            <p class="text-neon-cyan font-semibold">Energia'25</p>
+                            <span class="bg-cyan-900/50 text-neon-cyan px-3 py-1 rounded-full text-sm">March 2025</span>
                         </div>
                     </div>
                 </div>
@@ -428,7 +430,7 @@
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-gray-800 dark:bg-gray-900 animated-bg">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 text-neon-red glow-red">Get In Touch</h2>
+            <h2 class="text-4xl font-bold text-center mb-12 text-neon-cyan glow-cyan">Get In Touch</h2>
             <div class="max-w-4xl mx-auto">
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="bg-gray-700/50 dark:bg-gray-800/50 rounded-lg p-8 card-hover backdrop-blur-sm">
@@ -462,11 +464,11 @@
                         <h3 class="text-2xl font-semibold mb-6 text-white">Connect With Me</h3>
                         <div class="flex space-x-4">
                             <a href="https://www.linkedin.com/in/gaurav-tiwari-66012831b/" target="_blank" 
-                               class="flex items-center justify-center w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors glow-red">
+                               class="flex items-center justify-center w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors glow-cyan">
                                 <i class="fab fa-linkedin text-xl"></i>
                             </a>
                             <a href="https://github.com/Gauravtiwari31" target="_blank" 
-                               class="flex items-center justify-center w-12 h-12 bg-gray-700 hover:bg-gray-800 text-white rounded-full transition-colors glow-red">
+                               class="flex items-center justify-center w-12 h-12 bg-gray-700 hover:bg-gray-800 text-white rounded-full transition-colors glow-cyan">
                                 <i class="fab fa-github text-xl"></i>
                             </a>
                             <a href="mailto:gauravt9431@gmail.com" 
@@ -491,67 +493,58 @@
     </footer>
 
     <script>
-        // Cursor Line Trail Effect
+        // Cursor Smoke Trail Effect
         document.addEventListener('DOMContentLoaded', () => {
             const cursorTrail = document.getElementById('cursor-trail');
-            let lastX = 0;
-            let lastY = 0;
-            let mouseSpeed = 0;
+            let particles = [];
+            let mouseX = 0;
+            let mouseY = 0;
             
-            // Track mouse position and speed
+            // Track mouse position
             document.addEventListener('mousemove', (e) => {
-                const nowX = e.clientX;
-                const nowY = e.clientY;
-                
-                // Calculate mouse speed
-                const deltaX = nowX - lastX;
-                const deltaY = nowY - lastY;
-                mouseSpeed = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-                
-                createLineSegment(lastX, lastY, nowX, nowY);
-                
-                lastX = nowX;
-                lastY = nowY;
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                createParticle();
             });
             
-            // Create line segments between mouse positions
-            function createLineSegment(x1, y1, x2, y2) {
-                const line = document.createElement('div');
-                line.className = 'cursor-line';
+            // Create particles at cursor position
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'cursor-particle';
                 
-                // Calculate line length and angle
-                const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-                const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+                // Random size variation
+                const size = Math.random() * 10 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
                 
-                // Position at midpoint between points
-                const midX = (x1 + x2) / 2;
-                const midY = (y1 + y2) / 2;
+                // Position at cursor
+                particle.style.left = `${mouseX}px`;
+                particle.style.top = `${mouseY}px`;
                 
-                // Dynamic width based on mouse speed
-                const dynamicWidth = Math.min(100, Math.max(20, mouseSpeed * 1.5));
-                
-                line.style.width = `${dynamicWidth}px`;
-                line.style.left = `${midX}px`;
-                line.style.top = `${midY}px`;
-                line.style.transform = `rotate(${angle}deg)`;
-                
-                // Vary opacity based on speed
-                const opacity = Math.min(0.9, 0.3 + mouseSpeed / 100);
-                line.style.opacity = opacity;
-                
-                // Random reddish color variation
-                const hue = 350 + Math.random() * 10; // Red-pink range
+                // Random color variation
+                const hue = 200 + Math.random() * 40; // Blue to purple range
                 const saturation = 80 + Math.random() * 20;
-                const lightness = 50 + Math.random() * 10;
-                line.style.background = `linear-gradient(90deg, hsla(${hue}, ${saturation}%, ${lightness}%, 0.8), hsla(${hue}, ${saturation}%, ${lightness}%, 0))`;
+                const lightness = 50 + Math.random() * 20;
+                particle.style.background = `radial-gradient(circle, hsla(${hue}, ${saturation}%, ${lightness}%, 0.8) 0%, hsla(${hue + 40}, ${saturation}%, ${lightness}%, 0.4) 70%, transparent 100%`;
                 
-                cursorTrail.appendChild(line);
+                // Random animation duration
+                const duration = 1 + Math.random() * 1;
+                particle.style.animationDuration = `${duration}s`;
                 
-                // Remove line after animation completes
+                cursorTrail.appendChild(particle);
+                
+                // Remove particle after animation completes
                 setTimeout(() => {
-                    line.remove();
-                }, 1000);
+                    particle.remove();
+                }, duration * 1000);
             }
+            
+            // Create occasional particles even when not moving (for ambient effect)
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    createParticle();
+                }
+            }, 100);
         });
 
         // Theme toggle functionality
