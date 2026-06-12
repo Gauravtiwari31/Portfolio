@@ -2,7 +2,7 @@
 
 A modern, interactive portfolio website built with React, TypeScript, Three.js, and GSAP — featuring 3D character rendering, smooth scroll animations, and a responsive design.
 
-![Portfolio Preview](../screenshots/Gauravpf.png)
+![Portfolio Preview](./public/screenshots/Gauravpf.png)
 
 ---
 
