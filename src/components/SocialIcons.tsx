@@ -78,7 +78,7 @@ const SocialIcons = () => {
       </div>
       <a
         className="resume-button"
-        href=https://drive.google.com/file/d/1CFJ5csY3nt_cVGdc9SxRfiswe8gk_89r/view?usp=drivesdk"
+        href="https://drive.google.com/file/d/1CFJ5csY3nt_cVGdc9SxRfiswe8gk_89r/view?usp=drivesdk"
         target="_blank"
         data-cursor="disable"
         aria-label="Download Resume"
