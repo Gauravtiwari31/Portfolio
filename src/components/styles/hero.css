@@ -52,8 +52,8 @@
   left: 50%;
   top: 50%;
   z-index: 2;
-  width: min(880px, 96vw);
-  height: min(620px, 72vh);
+  width: min(720px, 84vw);
+  height: min(540px, 64vh);
   transform: translate(-50%, -50%);
   pointer-events: none;
 }

@@ -17,6 +17,11 @@ import { usePointerNDC } from "./usePointerNDC";
    caged by two counter-rotating chrome rings. Replaces the old avatar.
    ------------------------------------------------------------------------- */
 
+// What the transmission pass returns over empty scene. Kept near-black on
+// purpose: the knot's form reads from specular reflection off the
+// lightformers, and a bright value here flattens it into uniform haze.
+const BACKDROP = new THREE.Color("#150b07");
+
 function Rings() {
   const a = useRef<THREE.Mesh>(null);
   const b = useRef<THREE.Mesh>(null);
@@ -29,23 +34,25 @@ function Rings() {
 
   return (
     <>
+      {/* Radii kept just outside the knot (outer radius ~1.33) — wider and
+          they stop reading as a cage and start reading as stray lines. */}
       <mesh ref={a} rotation={[Math.PI / 2.6, 0.4, 0]}>
-        <torusGeometry args={[1.92, 0.0075, 6, 220]} />
+        <torusGeometry args={[1.55, 0.008, 6, 220]} />
         <meshStandardMaterial
-          color="#7c7c8a"
+          color="#b9b9c6"
           metalness={1}
-          roughness={0.22}
-          envMapIntensity={2.2}
+          roughness={0.18}
+          envMapIntensity={2.6}
         />
       </mesh>
-      <mesh ref={b} scale={1.18} rotation={[-Math.PI / 3.4, -0.55, 0.3]}>
-        <torusGeometry args={[1.92, 0.0075, 6, 220]} />
+      <mesh ref={b} scale={1.12} rotation={[-Math.PI / 3.4, -0.55, 0.3]}>
+        <torusGeometry args={[1.55, 0.006, 6, 220]} />
         <meshStandardMaterial
           color="#ff4d19"
           metalness={0.9}
           roughness={0.3}
           emissive="#ff4d19"
-          emissiveIntensity={0.55}
+          emissiveIntensity={0.9}
         />
       </mesh>
     </>
@@ -68,11 +75,13 @@ function Core() {
     <mesh ref={ref}>
       <icosahedronGeometry args={[0.62, 1]} />
       <meshStandardMaterial
-        color="#1a0700"
-        emissive="#ff5a1f"
-        emissiveIntensity={3.4}
-        roughness={0.35}
-        metalness={0.2}
+        color="#2b0a00"
+        emissive="#ff3d0d"
+        // ACES desaturates toward white as intensity climbs — 3.4 rendered
+        // the core as a flat cream wedge instead of anything molten.
+        emissiveIntensity={1.7}
+        roughness={0.4}
+        metalness={0.1}
         flatShading
       />
     </mesh>
@@ -119,17 +128,24 @@ function Knot({ lite }: { lite: boolean }) {
           samples={6}
           resolution={256}
           transmission={1}
-          thickness={0.85}
-          roughness={0.07}
-          ior={1.52}
-          chromaticAberration={0.42}
-          anisotropicBlur={0.35}
-          distortion={0.3}
-          distortionScale={0.4}
-          temporalDistortion={0.12}
+          // At 0.85 the attenuation swallowed the light and the knot went
+          // black plastic; at 0.3 it vanished. 0.5 keeps some body.
+          thickness={0.5}
+          roughness={0.04}
+          ior={1.5}
+          // 0.42 produced RGB fringing that read as a render bug.
+          chromaticAberration={0.2}
+          anisotropicBlur={0.15}
+          distortion={0.2}
+          distortionScale={0.3}
+          temporalDistortion={0.06}
           color="#ffffff"
-          attenuationColor="#ffb489"
-          attenuationDistance={2.4}
+          attenuationColor="#ffb27a"
+          attenuationDistance={3}
+          envMapIntensity={1.8}
+          // What the refraction samples where the scene is empty — without
+          // this the glass has only black to bend and goes opaque.
+          background={BACKDROP}
         />
       )}
     </mesh>
@@ -181,7 +197,7 @@ const Artifact = () => {
       }}
       onCreated={({ gl }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping;
-        gl.toneMappingExposure = 1.15;
+        gl.toneMappingExposure = 1.3;
       }}
     >
       <ambientLight intensity={0.35} />
@@ -192,10 +208,14 @@ const Artifact = () => {
         color="#ff6a2a"
       />
 
+      {/* scaled back so the knot sits between the two name lines instead of
+          swallowing them */}
       <Float speed={1.1} rotationIntensity={0.28} floatIntensity={0.55}>
-        <Knot lite={lite} />
-        <Core />
-        <Rings />
+        <group scale={0.82}>
+          <Knot lite={lite} />
+          <Core />
+          <Rings />
+        </group>
       </Float>
 
       {!lite && (
@@ -210,6 +230,15 @@ const Artifact = () => {
       )}
 
       <Environment resolution={256}>
+        {/* Broad panel directly behind the knot. The glass needs something
+            bright to bend; without it the refraction is all shadow. */}
+        <Lightformer
+          form="rect"
+          intensity={0.7}
+          position={[0, 0, -7]}
+          scale={[10, 8, 1]}
+          color="#ffd9c0"
+        />
         {/* key light overhead */}
         <Lightformer
           intensity={2.4}

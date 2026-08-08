@@ -75,6 +75,16 @@
   );
 }
 
+/* Darkens a card as the next one slides over it. Driven by GSAP. */
+.work-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* ---- text side ---- */
 .work-side {
   display: flex;

@@ -16,21 +16,27 @@ const Work = () => {
 
       // Cards stack via position:sticky — this just recedes the one below
       // as the next slides over it.
+      //
+      // The dimming rides an overlay's opacity rather than filter:brightness
+      // on the card: a card's computed filter starts as `none`, which GSAP
+      // can't interpolate from, so it would snap to full dim on the first
+      // frame. Opacity also composites instead of repainting every scroll
+      // frame.
       cards.forEach((card, i) => {
         const next = cards[i + 1];
         if (!next) return;
-        gsap.to(card, {
-          scale: 0.93,
-          yPercent: -3,
-          filter: "brightness(0.55)",
-          ease: "none",
-          scrollTrigger: {
-            trigger: next,
-            start: "top bottom",
-            end: "top top",
-            scrub: 0.4,
-          },
-        });
+
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: next,
+              start: "top 75%",
+              end: "top 5%",
+              scrub: 0.4,
+            },
+          })
+          .to(card, { scale: 0.93, yPercent: -3, ease: "none" }, 0)
+          .to(card.querySelector(".work-veil"), { opacity: 0.62, ease: "none" }, 0);
       });
 
       // Slow parallax drift on each screenshot inside its frame.
@@ -170,6 +176,8 @@ const Work = () => {
                 <img src={p.image} alt={`${p.title} interface`} loading="lazy" />
                 <span className="work-shot-frame" aria-hidden="true" />
               </a>
+
+              <span className="work-veil" aria-hidden="true" />
             </div>
           </article>
         ))}
