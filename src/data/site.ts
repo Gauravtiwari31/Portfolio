@@ -9,7 +9,7 @@ export const profile = {
   github: "https://github.com/Gauravtiwari31",
   linkedin: "https://www.linkedin.com/in/gaurav-tiwari-66012831b/",
   resume:
-    "https://drive.google.com/file/d/1eZh0TNBNZLfhJRsvle8cS9KlvobPunbI/view?usp=sharing",
+    "https://drive.google.com/file/d/1CFJ5csY3nt_cVGdc9SxRfiswe8gk_89r/view?usp=drivesdk",
 };
 
 export const tickerWords = [
