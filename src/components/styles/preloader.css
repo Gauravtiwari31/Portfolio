@@ -1,0 +1,139 @@
+.pre {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.pre-cols {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.pre-col {
+  flex: 1;
+  background: var(--ink);
+  transform-origin: top center;
+  /* hairline so the columns read as panels while they lift */
+  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.02);
+}
+
+.pre-inner {
+  position: absolute;
+  inset: 0;
+  padding: var(--gut);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pre-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.pre-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.pre-brand-sub {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--tx-faint);
+}
+
+.pre-mid {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.pre-words {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 5vw, 4rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.pre-word {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55rem;
+}
+
+.pre-word:nth-child(2) {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--flare);
+}
+
+.pre-dot {
+  font-style: normal;
+  color: var(--tx-faint);
+  font-weight: 300;
+}
+
+.pre-count {
+  display: flex;
+  align-items: baseline;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3.5rem, 11vw, 9rem);
+  line-height: 0.82;
+  letter-spacing: -0.055em;
+  font-variant-numeric: tabular-nums;
+}
+
+.pre-count i {
+  font-style: normal;
+  font-size: 0.28em;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  color: var(--flare);
+  margin-left: 0.4rem;
+  transform: translateY(-0.2em);
+}
+
+.pre-rule {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  background: var(--line-soft);
+  margin-top: clamp(1.5rem, 4vw, 3rem);
+}
+
+.pre-rule-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--molten);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+@media (max-width: 700px) {
+  .pre-mid {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+}

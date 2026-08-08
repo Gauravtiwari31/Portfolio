@@ -1,0 +1,328 @@
+.hero {
+  position: relative;
+  min-height: var(--vh);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-block: clamp(6rem, 12vh, 9rem) clamp(3rem, 8vh, 5rem);
+  isolation: isolate;
+}
+
+/* ---- backdrop ------------------------------------------------------------ */
+.hero-grid {
+  position: absolute;
+  inset: -10%;
+  z-index: 0;
+  background-image: linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size: clamp(48px, 6vw, 88px) clamp(48px, 6vw, 88px);
+  -webkit-mask-image: radial-gradient(
+    ellipse 65% 60% at 50% 45%,
+    #000 15%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(
+    ellipse 65% 60% at 50% 45%,
+    #000 15%,
+    transparent 78%
+  );
+}
+
+.hero-glow {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  z-index: 0;
+  width: min(1000px, 90vw);
+  aspect-ratio: 1.35;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 77, 25, 0.2) 0%,
+    rgba(255, 160, 46, 0.09) 32%,
+    transparent 68%
+  );
+  filter: blur(24px);
+  pointer-events: none;
+}
+
+/* ---- 3D stage ------------------------------------------------------------ */
+.hero-canvas {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  width: min(880px, 96vw);
+  height: min(620px, 72vh);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.artifact-canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ---- content ------------------------------------------------------------- */
+.hero-inner {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 3.2vh, 2.25rem);
+}
+
+.hero-rail {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--tx-faint);
+  border-block: 1px solid var(--line-soft);
+  padding-block: 0.7rem;
+}
+
+.hero-rail--bottom {
+  border-bottom: 0;
+}
+
+.hero-rail span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.hero-rail i {
+  width: 5px;
+  height: 5px;
+  border-radius: 99px;
+  background: var(--flare);
+  box-shadow: 0 0 10px var(--flare);
+}
+
+/* ---- the name ------------------------------------------------------------ */
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  margin-block: clamp(-0.5rem, -1vh, 0rem);
+}
+
+.hero-word {
+  position: relative;
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--t-mega);
+  line-height: 0.82;
+  letter-spacing: -0.055em;
+  white-space: nowrap;
+}
+
+/* behind the glass: outline only, so the artifact reads through the letters */
+.hero-word.is-back {
+  z-index: 1;
+  align-self: flex-start;
+  color: transparent;
+  -webkit-text-stroke: clamp(1px, 0.12vw, 2px) rgba(244, 241, 236, 0.5);
+}
+
+/* in front of the glass: solid */
+.hero-word.is-front {
+  z-index: 3;
+  align-self: flex-end;
+  color: var(--tx);
+  text-shadow: 0 8px 60px rgba(11, 11, 13, 0.75);
+}
+
+.hero-word-in {
+  display: block;
+}
+
+/* ---- foot ---------------------------------------------------------------- */
+.hero-foot {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  flex-wrap: wrap;
+}
+
+.hero-lede {
+  max-width: 42ch;
+  font-size: clamp(1rem, 1.25vw, 1.24rem);
+  line-height: 1.5;
+  color: var(--tx-mute);
+}
+
+.hero-lede .serif {
+  color: var(--tx);
+  font-size: 1.12em;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+/* ---- buttons ------------------------------------------------------------- */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 99px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  overflow: hidden;
+  border: 1px solid transparent;
+  transition: color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+
+.btn span,
+.btn svg {
+  position: relative;
+  z-index: 1;
+}
+
+.btn svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.45s var(--ease);
+}
+
+.btn:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transition: transform 0.55s var(--ease);
+}
+
+.btn--solid {
+  color: var(--ink);
+}
+
+.btn--solid::before {
+  background: var(--bone);
+}
+
+.btn--solid:hover {
+  color: #fff;
+}
+
+.btn--solid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--molten);
+  transform: translateY(101%);
+  transition: transform 0.55s var(--ease);
+}
+
+.btn--solid:hover::after {
+  transform: translateY(0);
+}
+
+.btn--ghost {
+  border-color: var(--line);
+  color: var(--tx-mute);
+}
+
+.btn--ghost::before {
+  background: var(--bone);
+  transform: translateY(101%);
+}
+
+.btn--ghost:hover {
+  color: var(--ink);
+  border-color: var(--bone);
+}
+
+.btn--ghost:hover::before {
+  transform: translateY(0);
+}
+
+/* ---- scroll cue ---------------------------------------------------------- */
+.hero-scroll {
+  position: absolute;
+  bottom: clamp(1.25rem, 3vh, 2.25rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--tx-faint);
+}
+
+.hero-scroll-bar {
+  width: 1px;
+  height: 46px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.hero-scroll-bar i {
+  display: block;
+  width: 100%;
+  height: 45%;
+  background: var(--flare);
+  animation: heroScroll 2.1s var(--ease-io) infinite;
+}
+
+@keyframes heroScroll {
+  0% {
+    transform: translateY(-105%);
+  }
+  55%,
+  100% {
+    transform: translateY(230%);
+  }
+}
+
+/* ---- responsive ---------------------------------------------------------- */
+@media (max-width: 900px) {
+  .hero-canvas {
+    width: 118vw;
+    height: 52vh;
+    top: 46%;
+  }
+  .hero-word.is-back,
+  .hero-word.is-front {
+    align-self: center;
+  }
+  .hero-foot {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero-rail {
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+  }
+  .hero-rail span:last-child {
+    display: none;
+  }
+  .hero-scroll {
+    display: none;
+  }
+}

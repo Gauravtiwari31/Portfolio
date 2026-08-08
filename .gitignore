@@ -65,3 +65,5 @@ Desktop.ini
 backup/
 .cache/
 *.bak
+# Claude Code local config
+.claude/

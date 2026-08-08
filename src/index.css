@@ -1,145 +1,297 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+/* ============================================================================
+   GAURAV TIWARI — PORTFOLIO
+   Design system: "MOLTEN"
+   Ink & bone editorial contrast, molten-orange accent, kinetic grotesque type.
+   ========================================================================== */
 
 :root {
-  font-family: "Inter", sans-serif;
+  /* ---- Surface ---- */
+  --ink: #0b0b0d;
+  --ink-2: #101014;
+  --ink-3: #17171c;
+  --ink-4: #1f1f26;
+  --bone: #efebe3;
+  --bone-2: #ded7c9;
+  --bone-3: #c9c0ae;
 
-  font-optical-sizing: auto;
-  font-style: normal;
-  line-height: 1.5;
-  scroll-behavior: smooth;
-  color-scheme: light dark;
-  color: #eae5ec;
-  background-color: var(--backgroundColor);
+  /* ---- Accent ---- */
+  --flare: #ff4d19;
+  --ember: #ffa02e;
+  --flare-soft: rgba(255, 77, 25, 0.14);
+  --molten: linear-gradient(100deg, var(--flare) 0%, var(--ember) 100%);
 
+  /* ---- Text on ink ---- */
+  --tx: #f4f1ec;
+  --tx-mute: rgba(244, 241, 236, 0.62);
+  --tx-faint: rgba(244, 241, 236, 0.34);
+  --line: rgba(244, 241, 236, 0.12);
+  --line-soft: rgba(244, 241, 236, 0.06);
+
+  /* ---- Text on bone ---- */
+  --tx-ink: #14141a;
+  --tx-ink-mute: rgba(20, 20, 26, 0.62);
+  --line-ink: rgba(20, 20, 26, 0.14);
+
+  /* ---- Type ---- */
+  --font-display: "Bricolage Grotesque", "Space Grotesk", sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-body: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* fluid scale */
+  --t-mega: clamp(3.2rem, 13vw, 12rem);
+  --t-xl: clamp(2.4rem, 7.2vw, 6.5rem);
+  --t-lg: clamp(1.9rem, 4.4vw, 3.6rem);
+  --t-md: clamp(1.25rem, 2.1vw, 1.75rem);
+  --t-body: clamp(0.98rem, 1.05vw, 1.12rem);
+  --t-mono: clamp(0.66rem, 0.78vw, 0.78rem);
+
+  /* ---- Layout ---- */
+  --gut: clamp(1.25rem, 4vw, 4.5rem);
+  --maxw: 1560px;
+  --vh: 100vh;
+  --vh: 100svh;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io: cubic-bezier(0.76, 0, 0.24, 1);
+
+  color-scheme: dark;
+  font-family: var(--font-body);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  --accentColor: #c2a4ff;
-  --backgroundColor: #0b080c;
-  --vh: 100vh;
-  --vh: 100svh;
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: clamp(4.5rem, 9vh, 6rem);
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--tx);
+  font-size: var(--t-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  overflow-y: hidden; /* released by the preloader */
+  -webkit-tap-highlight-color: transparent;
+}
+
+body.is-ready {
+  overflow-y: auto;
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+  margin: 0;
+  text-wrap: balance;
 }
-body {
-  overflow: hidden;
+
+p {
+  margin: 0;
+  text-wrap: pretty;
 }
+
 a {
   color: inherit;
-  text-decoration: inherit;
-}
-a:hover {
-  color: var(--accentColor);
-}
-main {
-  opacity: 1;
-  transition: 0.3s;
-}
-.main-active {
-  opacity: 0;
-  animation: fadeIn 1s 1;
-  animation-fill-mode: forwards;
-}
-@keyframes fadeIn {
-  100% {
-    opacity: 1;
-  }
-}
-body {
-  margin: 0;
-  height: auto;
-  background-color: #000;
-  flex-grow: 1;
-  --cWidth: calc(100% - 30px);
-  --cMaxWidth: 1920px;
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-.main-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  text-decoration: none;
 }
 
-.container-main {
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--flare);
+  color: #fff;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ink-4);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--flare);
+}
+
+/* ============================================================================
+   Primitives
+   ========================================================================== */
+
+.shell {
   width: 100%;
-  margin: auto;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gut);
+}
+
+.sec {
   position: relative;
+  padding-block: clamp(5rem, 12vw, 11rem);
 }
-.container1 {
-  width: var(--cWidth);
-  height: var(--vh);
-  margin: auto;
-  position: relative;
+
+.sec--bone {
+  background: var(--bone);
+  color: var(--tx-ink);
 }
-.split-line {
-  overflow: hidden;
-}
-.split-h2 {
-  overflow: hidden;
+
+/* mono eyebrow label with index + rule */
+.eyebrow {
   display: flex;
-  white-space: nowrap;
-  flex-wrap: nowrap;
-}
-
-.techstack {
-  width: 100%;
-  /* FIX: create a new stacking context so the section and its children
-     paint above the GSAP-pinned work section (which goes position:fixed
-     during scroll and would otherwise swallow everything beneath it) */
-  position: relative;
-  z-index: 20;
-  isolation: isolate;
-  height: var(--vh);
-  margin: auto;
-  margin-top: 50px;
-  margin-bottom: -100px;
-  /* Give the section a solid background so the work pin can't bleed through */
-  background-color: var(--backgroundColor);
-}
-
-.techstack h2 {
-  font-size: 80px;
-  text-align: center;
-  /* FIX: was position:absolute with no z-index — the Three.js Canvas
-     (also a child of .techstack) renders on a WebGL context that sits
-     above normal DOM paint order. Raise the h2 above it. */
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  padding-top: 120px;
+  align-items: center;
+  gap: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
   font-weight: 400;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  /* Prevent the heading from being clipped by the Canvas overflow */
+  color: var(--tx-faint);
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+}
+
+.sec--bone .eyebrow {
+  color: rgba(20, 20, 26, 0.45);
+}
+
+.eyebrow::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.eyebrow b {
+  font-weight: 500;
+  color: var(--flare);
+}
+
+/* editorial serif accent inside headlines */
+.serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+.flare {
+  color: var(--flare);
+}
+
+/* outlined display text */
+.hollow {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--tx-faint);
+}
+
+.sec--bone .hollow {
+  -webkit-text-stroke: 1px rgba(20, 20, 26, 0.3);
+}
+
+/* mono meta line */
+.meta {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--tx-faint);
+}
+
+/* chip / tag */
+.chip {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  color: var(--tx-mute);
+  white-space: nowrap;
+  transition: border-color 0.35s var(--ease), color 0.35s var(--ease),
+    background 0.35s var(--ease);
+}
+
+.chip:hover {
+  border-color: var(--flare);
+  color: var(--flare);
+  background: var(--flare-soft);
+}
+
+.sec--bone .chip {
+  border-color: var(--line-ink);
+  color: var(--tx-ink-mute);
+}
+
+/* ---- GSAP reveal hooks: hidden until the section animation runs ---- */
+.rv {
+  opacity: 0;
+}
+
+.mask {
+  display: block;
+  overflow: hidden;
+}
+
+/* film grain + vignette over the whole page */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
   pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* The Canvas needs to fill the remaining space below the heading */
-.tech-canvas {
-  position: absolute !important;
-  top: 0;
-  left: 0;
-  width: 100% !important;
-  height: 100% !important;
-  z-index: 1;
-}
-
-@media screen and (min-width: 768px) {
-  body {
-    --cWidth: 94%;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-}
-@media screen and (max-width: 900px) {
-  .techstack h2 {
-    font-size: 40px;
+  /* Nothing animates, so anything that starts hidden must be shown outright. */
+  .rv,
+  .nav,
+  .hero-title,
+  [data-split] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

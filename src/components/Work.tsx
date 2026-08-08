@@ -1,113 +1,180 @@
-import "./styles/Work.css";
-import WorkImage from "./WorkImage";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(useGSAP);
-
-const projects = [
-  {
-    title: "VitalSync",
-    category: "Full-Stack / Healthcare",
-    tools: "Next.js 14, TypeScript, PostgreSQL, Gemini AI, LiveKit",
-    description:
-      "Multi-role healthcare platform for patients, doctors, and hospitals. OPD queue management, appointment scheduling, WebRTC video via LiveKit, Razorpay payments, OAuth 2.0 + RBAC, deployed on Vercel with Neon PostgreSQL.",
-    link: "https://github.com/Gauravtiwari31/VitalSync",
-    image: "/screenshots/vitalsync.png",
-  },
-  {
-    title: "AI-Powered Network Security Framework",
-    category: "Cybersecurity / Machine Learning",
-    tools: "Python, Scikit-learn, Deep Packet Inspection, Machine Learning",
-    description:
-      "3-layer hybrid pipeline combining ML models (Random Forest, Logistic Regression), rule-based filtering, and Deep Packet Inspection. Blocks SQL injection and 15+ categories of suspicious traffic.",
-    link: "https://github.com/Gauravtiwari31/AI-Powered-Network-Security-Framework",
-    image: "/screenshots/AI firewall project image.png",
-  },
-  {
-    title: "Online Commerce Platform",
-    category: "Full-Stack / MERN",
-    tools: "React.js, Node.js, Express.js, MongoDB, Docker",
-    description:
-      "JWT auth with RBAC, content-based recommendation engine improving discoverability by 25%, Dockerised deployment, Swagger/OpenAPI documented RESTful endpoints.",
-    link: "https://github.com/Gauravtiwari31/Online-Commerce_MERN-Stack",
-    image: "/screenshots/onlineecommerce.png",
-  },
-];
+import { useLayoutEffect, useRef } from "react";
+import { gsap, isTouch, prefersReducedMotion } from "../lib/gsap";
+import { projects } from "../data/site";
+import "./styles/work.css";
 
 const Work = () => {
-  useGSAP(() => {
-    let translateX: number = 0;
+  const root = useRef<HTMLElement>(null);
 
-    function setTranslateX() {
-      const box = document.getElementsByClassName("work-box");
-      const rectLeft = document
-        .querySelector(".work-container")!
-        .getBoundingClientRect().left;
-      const rect = box[0].getBoundingClientRect();
-      const parentWidth = box[0].parentElement!.getBoundingClientRect().width;
-      let padding: number =
-        parseInt(window.getComputedStyle(box[0]).padding) / 2;
-      translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
-    }
+  useLayoutEffect(() => {
+    if (prefersReducedMotion()) return;
 
-    setTranslateX();
+    const listeners: Array<() => void> = [];
 
-    let timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".work-section",
-        start: "top top",
-        end: `+=${translateX}`,
-        scrub: true,
-        pin: true,
-        id: "work",
-      },
-    });
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray<HTMLElement>(".work-card");
 
-    timeline.to(".work-flex", {
-      x: -translateX,
-      ease: "none",
-    });
+      // Cards stack via position:sticky — this just recedes the one below
+      // as the next slides over it.
+      cards.forEach((card, i) => {
+        const next = cards[i + 1];
+        if (!next) return;
+        gsap.to(card, {
+          scale: 0.93,
+          yPercent: -3,
+          filter: "brightness(0.55)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: next,
+            start: "top bottom",
+            end: "top top",
+            scrub: 0.4,
+          },
+        });
+      });
+
+      // Slow parallax drift on each screenshot inside its frame.
+      gsap.utils.toArray<HTMLElement>(".work-shot img").forEach((img) => {
+        gsap.fromTo(
+          img,
+          { yPercent: -6 },
+          {
+            yPercent: 6,
+            ease: "none",
+            scrollTrigger: {
+              trigger: img.closest(".work-card"),
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      });
+
+      // Pointer tilt on the screenshots.
+      if (isTouch()) return;
+      gsap.utils.toArray<HTMLElement>(".work-shot").forEach((shot) => {
+        // Perspective has to live on the transformed element itself here —
+        // a CSS `perspective` on .work-shot would only affect its children.
+        gsap.set(shot, { transformPerspective: 850 });
+
+        const rx = gsap.quickTo(shot, "rotationX", {
+          duration: 0.7,
+          ease: "power3",
+        });
+        const ry = gsap.quickTo(shot, "rotationY", {
+          duration: 0.7,
+          ease: "power3",
+        });
+
+        const move = (e: PointerEvent) => {
+          const r = shot.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          rx(-py * 11);
+          ry(px * 13);
+        };
+        const reset = () => {
+          rx(0);
+          ry(0);
+        };
+
+        shot.addEventListener("pointermove", move);
+        shot.addEventListener("pointerleave", reset);
+        // gsap.context reverts tweens but not DOM listeners — clean up here.
+        listeners.push(() => {
+          shot.removeEventListener("pointermove", move);
+          shot.removeEventListener("pointerleave", reset);
+        });
+      });
+    }, root);
 
     return () => {
-      timeline.kill();
-      ScrollTrigger.getById("work")?.kill();
+      listeners.forEach((off) => off());
+      ctx.revert();
     };
   }, []);
 
   return (
-    <div className="work-section" id="work">
-      <div className="work-container section-container">
-        <h2>
-          My <span>Work</span>
-        </h2>
-        <div className="work-flex">
-          {projects.map((project, index) => (
-            <div className="work-box" key={index}>
-              <div className="work-info">
-                <div className="work-title">
-                  <h3>0{index + 1}</h3>
-                  <div>
-                    <h4>{project.title}</h4>
-                    <p>{project.category}</p>
-                  </div>
-                </div>
-                <h4>Stack</h4>
-                <p>{project.tools}</p>
-                <h4 style={{ marginTop: "0.5rem" }}>Overview</h4>
-                <p>{project.description}</p>
-              </div>
-              <WorkImage
-                image={project.image}
-                alt={project.title}
-                link={project.link}
-              />
-            </div>
-          ))}
+    <section className="sec work" id="work" ref={root}>
+      <div className="shell">
+        <div className="eyebrow">
+          <b>04</b> <span>Selected work</span>
+        </div>
+        <div className="work-head-row">
+          <h2 className="work-head" data-split>
+            Things I've
+            <br />
+            <em className="serif">actually shipped.</em>
+          </h2>
+          <span className="work-count rv">
+            {String(projects.length).padStart(2, "0")} projects
+          </span>
         </div>
       </div>
-    </div>
+
+      <div className="work-stack shell">
+        {projects.map((p, i) => (
+          <article
+            className="work-card"
+            key={p.id}
+            style={{ "--i": i } as React.CSSProperties}
+          >
+            <div className="work-card-in">
+              <div className="work-side">
+                <div className="work-side-top">
+                  <span className="work-id">{p.id}</span>
+                  <span className="work-year">{p.year}</span>
+                </div>
+
+                <h3 className="work-title">{p.title}</h3>
+                <span className="work-cat">{p.category}</span>
+                <p className="work-summary">{p.summary}</p>
+
+                <div className="work-tags">
+                  {p.stack.map((s) => (
+                    <span className="chip" key={s}>
+                      {s}
+                    </span>
+                  ))}
+                </div>
+
+                <a
+                  className="work-link"
+                  href={p.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-cursor="link"
+                >
+                  <span>View repository</span>
+                  <svg viewBox="0 0 16 16" aria-hidden="true">
+                    <path
+                      d="M4 12L12 4M12 4H6M12 4V10"
+                      stroke="currentColor"
+                      strokeWidth="1.4"
+                      fill="none"
+                    />
+                  </svg>
+                </a>
+              </div>
+
+              <a
+                className="work-shot"
+                href={p.link}
+                target="_blank"
+                rel="noreferrer"
+                data-cursor="view"
+                data-label="Open"
+                aria-label={`Open ${p.title} on GitHub`}
+              >
+                <img src={p.image} alt={`${p.title} interface`} loading="lazy" />
+                <span className="work-shot-frame" aria-hidden="true" />
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 };
 
