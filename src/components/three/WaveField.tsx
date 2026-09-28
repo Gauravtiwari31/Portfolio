@@ -6,7 +6,7 @@ import { usePointerNDC } from "./usePointerNDC";
 
 /* ---------------------------------------------------------------------------
    A grid of points displaced by layered sine waves, with a ripple that
-   follows the pointer. Molten near the crests, near-black in the troughs.
+   follows the pointer. Red near the crests, dim grey in the troughs.
    ------------------------------------------------------------------------- */
 
 const VERT = /* glsl */ `
@@ -80,8 +80,8 @@ function Field({ dense }: { dense: boolean }) {
       uTime: { value: 0 },
       uPointer: { value: new THREE.Vector2(999, 999) },
       uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
-      uCold: { value: new THREE.Color("#2a2130") },
-      uHot: { value: new THREE.Color("#ff5a1f") },
+      uCold: { value: new THREE.Color("#3a3a3e") },
+      uHot: { value: new THREE.Color("#e2201f") },
     }),
     []
   );

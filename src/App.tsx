@@ -35,7 +35,6 @@ const App = () => {
     <>
       <Preloader onDone={handleReady} />
       <Cursor />
-      <div className="grain" aria-hidden="true" />
       <Nav ready={ready} />
 
       <main>

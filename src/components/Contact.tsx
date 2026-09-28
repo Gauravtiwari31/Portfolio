@@ -43,7 +43,6 @@ const Contact = () => {
 
   return (
     <section className="sec contact" id="contact" ref={root}>
-      <div className="contact-glow" aria-hidden="true" />
 
       <div className="shell">
         <div className="eyebrow">
@@ -53,7 +52,7 @@ const Contact = () => {
         <h2 className="contact-head" data-split>
           Got something
           <br />
-          worth <em className="serif">building?</em>
+          worth <em className="hl">building?</em>
         </h2>
 
         <a

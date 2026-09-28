@@ -63,7 +63,6 @@ const Hero = ({ ready }: { ready: boolean }) => {
   return (
     <section className="hero" id="top" ref={root}>
       <div className="hero-grid" aria-hidden="true" />
-      <div className="hero-glow" aria-hidden="true" />
 
       <div className="hero-canvas" ref={stage} aria-hidden="true">
         {mount3D && (
@@ -96,7 +95,7 @@ const Hero = ({ ready }: { ready: boolean }) => {
         <div className="hero-foot">
           <p className="hero-lede">
             I build software that has to hold up —{" "}
-            <em className="serif">under load, under attack,</em> and at sixty
+            <em className="hl">under load, under attack,</em> and at sixty
             frames a second.
           </p>
 

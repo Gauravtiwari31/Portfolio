@@ -3,7 +3,7 @@ import "./styles/about.css";
 
 const About = () => {
   return (
-    <section className="sec sec--bone about" id="about">
+    <section className="sec sec--paper about" id="about">
       <div className="shell">
         <div className="eyebrow">
           <b>01</b> <span>Index — About</span>
@@ -14,7 +14,7 @@ const About = () => {
           <br />
           one obsession — making complex
           <br />
-          systems <em className="serif">actually behave.</em>
+          systems <em className="hl">actually behave.</em>
         </h2>
 
         <div className="about-grid">

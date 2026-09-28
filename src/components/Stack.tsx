@@ -37,7 +37,7 @@ const Stack = () => {
 
         <div className="stack-head-row">
           <h2 className="stack-head" data-split>
-            The tools I <em className="serif">reach for.</em>
+            The tools I <em className="hl">reach for.</em>
           </h2>
           <p className="stack-note rv">
             Chosen for what they solve, not what's trending. Move the pointer —

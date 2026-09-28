@@ -5,17 +5,11 @@
 
 .about-statement {
   font-size: var(--t-xl);
-  font-weight: 700;
-  letter-spacing: -0.045em;
-  line-height: 0.98;
-  max-width: 20ch;
+  letter-spacing: -0.015em;
+  line-height: 1.04;
+  max-width: 26ch;
   margin-bottom: clamp(3rem, 7vw, 5.5rem);
   opacity: 0;
-}
-
-.about-statement .serif {
-  color: var(--flare);
-  font-size: 1.05em;
 }
 
 .about-grid {
@@ -23,7 +17,7 @@
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: clamp(2rem, 6vw, 6rem);
   align-items: start;
-  border-top: 1px solid var(--line-ink);
+  border-top: 1px solid var(--line);
   padding-top: clamp(2rem, 4vw, 3.25rem);
 }
 
@@ -35,101 +29,100 @@
 }
 
 .about-copy p {
-  font-size: clamp(1rem, 1.15vw, 1.15rem);
-  line-height: 1.62;
-  color: var(--tx-ink-mute);
+  font-size: clamp(1rem, 1.1vw, 1.1rem);
+  line-height: 1.65;
+  color: var(--fg-muted);
 }
 
 .about-copy b {
-  font-weight: 500;
-  color: var(--tx-ink);
-  box-shadow: inset 0 -0.42em 0 rgba(255, 77, 25, 0.22);
+  font-weight: 600;
+  color: var(--fg);
 }
 
 .about-side {
   display: flex;
   flex-direction: column;
-  gap: clamp(1.75rem, 3.5vw, 2.75rem);
+  gap: var(--tile-gap);
 }
 
+/* ---- stat tiles: one Ndot numeral, one NType label ---- */
 .about-stats {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  background: var(--line-ink);
-  border: 1px solid var(--line-ink);
+  gap: var(--tile-gap);
 }
 
 .about-stats li {
-  background: var(--bone);
-  padding: clamp(1.1rem, 2vw, 1.6rem);
+  min-height: clamp(9.5rem, 14vw, 11.5rem);
+  background: var(--tile);
+  border: 1px solid var(--line);
+  border-radius: var(--nu-radius);
+  padding: var(--tile-pad);
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .about-stat-v {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 3.6vw, 3.1rem);
-  line-height: 1;
-  letter-spacing: -0.05em;
-  color: var(--tx-ink);
+  font-family: var(--nu-font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 4.6vw, 4rem);
+  line-height: 0.9;
+  letter-spacing: 0;
+  color: var(--fg);
 }
 
 .about-stat-l {
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.14em;
+  font-family: var(--nu-font-heading);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: rgba(20, 20, 26, 0.5);
-  line-height: 1.45;
+  color: var(--fg-muted);
+  line-height: 1.35;
 }
 
+/* ---- "currently" tile ---- */
 .about-now {
-  border: 1px solid var(--line-ink);
-  border-left: 3px solid var(--flare);
-  padding: clamp(1.1rem, 2vw, 1.5rem);
+  background: var(--tile);
+  border: 1px solid var(--line);
+  border-radius: var(--nu-radius);
+  padding: var(--tile-pad);
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
-  background: rgba(255, 255, 255, 0.35);
+  gap: 0.8rem;
 }
 
 .about-now-tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.22em;
+  gap: 0.6rem;
+  font-family: var(--nu-font-label);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--flare);
+  color: var(--fg);
 }
 
 .about-now-tag i {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 99px;
-  background: var(--flare);
-  animation: aboutPulse 2s infinite;
-}
-
-@keyframes aboutPulse {
-  50% {
-    opacity: 0.25;
-  }
+  background: var(--nu-accent);
+  animation: nuBlink 1.6s steps(1) infinite;
 }
 
 .about-now p {
-  font-size: 0.96rem;
-  line-height: 1.55;
-  color: var(--tx-ink-mute);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--fg-muted);
 }
 
+/* tablet: single column, so the four stats fit on one row */
 @media (max-width: 980px) {
   .about-grid {
     grid-template-columns: 1fr;
@@ -137,10 +130,21 @@
   .about-statement {
     max-width: 100%;
   }
+  .about-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
-@media (max-width: 520px) {
+/* phone: back to a 2 × 2 widget grid */
+@media (max-width: 700px) {
+  /* the desktop line breaks leave ragged orphans at this width */
+  .about-statement br {
+    display: none;
+  }
   .about-stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .about-stats li {
+    min-height: 8.5rem;
   }
 }

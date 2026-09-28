@@ -1,28 +1,38 @@
 .cap {
   position: relative;
   z-index: 4;
-  background: var(--ink);
+  border-top: 1px solid var(--line);
 }
 
 .cap-head {
   font-size: var(--t-lg);
-  letter-spacing: -0.045em;
+  letter-spacing: -0.015em;
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
   opacity: 0;
 }
 
-.cap-head .serif {
-  color: var(--flare);
-  font-size: 1.08em;
-}
-
+/* ---- accordion as a stack of tiles ---- */
 .cap-list {
-  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: var(--tile-gap);
 }
 
 .cap-row {
   position: relative;
-  border-bottom: 1px solid var(--line);
+  background: var(--tile);
+  border: 1px solid var(--line);
+  border-radius: var(--nu-radius);
+  overflow: hidden;
+  transition: border-color 0.4s var(--ease), background 0.4s var(--ease);
+}
+
+.cap-row:hover {
+  background: var(--tile-hover);
+}
+
+.cap-row.is-open {
+  border-color: var(--line-strong);
 }
 
 .cap-bar {
@@ -32,98 +42,67 @@
   grid-template-columns: auto minmax(0, 1fr) minmax(0, 0.9fr) auto;
   align-items: center;
   gap: clamp(1rem, 3vw, 2.5rem);
-  padding: clamp(1.35rem, 2.6vw, 2.1rem) clamp(0.5rem, 1.5vw, 1.25rem);
+  padding: var(--tile-pad);
   text-align: left;
-  overflow: hidden;
-}
-
-/* molten wash on hover */
-.cap-bar::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 77, 25, 0.16),
-    rgba(255, 160, 46, 0.03) 55%,
-    transparent
-  );
-  transform: translateX(-101%);
-  transition: transform 0.7s var(--ease);
-}
-
-.cap-bar:hover::before,
-.cap-row.is-open .cap-bar::before {
-  transform: translateX(0);
-}
-
-.cap-n,
-.cap-title,
-.cap-lede,
-.cap-plus {
-  position: relative;
-  z-index: 1;
+  border-radius: var(--nu-radius);
 }
 
 .cap-n {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.16em;
-  color: var(--tx-faint);
+  font-family: var(--nu-font-label);
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  color: var(--fg-faint);
   transition: color 0.4s var(--ease);
 }
 
 .cap-title {
-  font-family: var(--font-display);
+  font-family: var(--nu-font-heading);
   font-weight: 700;
-  font-size: clamp(1.6rem, 4vw, 3.2rem);
-  letter-spacing: -0.045em;
-  line-height: 1;
-  transition: transform 0.6s var(--ease), color 0.4s var(--ease);
+  font-size: clamp(1.45rem, 3.4vw, 2.75rem);
+  letter-spacing: -0.005em;
+  line-height: 1.08;
+  transition: transform 0.6s var(--ease);
 }
 
 .cap-lede {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(0.95rem, 1.4vw, 1.35rem);
-  color: var(--tx-faint);
+  font-size: clamp(0.92rem, 1.2vw, 1.1rem);
+  line-height: 1.45;
+  color: var(--fg-muted);
   transition: color 0.4s var(--ease);
 }
 
 .cap-bar:hover .cap-title {
-  transform: translateX(clamp(6px, 1vw, 16px));
+  transform: translateX(clamp(4px, 0.8vw, 12px));
 }
 
 .cap-bar:hover .cap-n,
 .cap-row.is-open .cap-n {
-  color: var(--flare);
-}
-
-.cap-row.is-open .cap-title {
-  color: var(--flare);
+  color: var(--nu-accent);
 }
 
 .cap-bar:hover .cap-lede {
-  color: var(--tx-mute);
+  color: var(--fg);
 }
 
-/* ---- plus / minus ---- */
+/* ---- plus / minus: outline at rest, accent fill when open ---- */
 .cap-plus {
-  width: 34px;
-  height: 34px;
+  position: relative;
+  width: 40px;
+  height: 40px;
   flex: none;
   display: grid;
   place-items: center;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   border-radius: 99px;
   transition: border-color 0.4s var(--ease), background 0.4s var(--ease);
 }
 
 .cap-plus i {
   position: absolute;
-  width: 12px;
-  height: 1.4px;
-  background: var(--tx);
+  width: 13px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: var(--fg);
   transition: transform 0.5s var(--ease), background 0.4s var(--ease);
 }
 
@@ -132,8 +111,12 @@
 }
 
 .cap-row.is-open .cap-plus {
-  background: var(--flare);
-  border-color: var(--flare);
+  background: var(--nu-accent);
+  border-color: var(--nu-accent);
+}
+
+.cap-row.is-open .cap-plus i {
+  background: var(--nu-white);
 }
 
 .cap-row.is-open .cap-plus i:last-child {
@@ -167,25 +150,41 @@
 
 .cap-drawer-in p {
   max-width: 68ch;
-  color: var(--tx-mute);
-  line-height: 1.62;
-  padding-inline: clamp(0.5rem, 1.5vw, 1.25rem);
-  padding-top: 0.25rem;
+  color: var(--fg-muted);
+  line-height: 1.65;
+  padding-inline: var(--tile-pad);
 }
 
 .cap-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  padding: 0 clamp(0.5rem, 1.5vw, 1.25rem) clamp(1.75rem, 3vw, 2.5rem);
+  padding: 0 var(--tile-pad) var(--tile-pad);
 }
 
 @media (max-width: 900px) {
   .cap-bar {
     grid-template-columns: auto minmax(0, 1fr) auto;
-    row-gap: 0.35rem;
+    align-items: start;
+    row-gap: 0.4rem;
   }
   .cap-lede {
-    grid-column: 2 / -1;
+    grid-column: 2 / 3;
+  }
+  /* keep the toggle on the title row; auto-placement would drop it below */
+  .cap-plus {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .cap-bar {
+    column-gap: 0.85rem;
+  }
+  .cap-plus {
+    width: 36px;
+    height: 36px;
   }
 }

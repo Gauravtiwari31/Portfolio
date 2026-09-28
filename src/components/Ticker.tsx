@@ -46,7 +46,7 @@ const Ticker = () => {
       {tickerWords.map((w) => (
         <span key={w}>
           {w}
-          <i>✳</i>
+          <i />
         </span>
       ))}
     </div>

@@ -1,8 +1,7 @@
 .path {
   position: relative;
   z-index: 4;
-  background: var(--ink-2);
-  border-top: 1px solid var(--line-soft);
+  border-top: 1px solid var(--line);
 }
 
 .path-grid {
@@ -22,124 +21,135 @@
 
 .path-head {
   font-size: var(--t-lg);
-  letter-spacing: -0.045em;
+  letter-spacing: -0.015em;
   opacity: 0;
-}
-
-.path-head .serif {
-  color: var(--flare);
-  font-size: 1.08em;
 }
 
 .path-note {
   max-width: 34ch;
-  color: var(--tx-faint);
+  color: var(--fg-muted);
   font-size: 0.98rem;
   line-height: 1.6;
 }
 
-/* ---- list ---- */
+/* ---- list: a dotted rail with a tile per entry ---- */
 .path-list {
+  --rail-w: 4px;
+  --rail-to-tile: clamp(1.25rem, 3vw, 2.5rem);
   list-style: none;
   margin: 0;
   padding: 0;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--tile-gap);
 }
 
 .path-rail {
   position: absolute;
   left: 0;
-  top: 0.55rem;
-  bottom: 0.55rem;
-  width: 1px;
-  background: var(--line);
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: var(--rail-w);
+  background-image: radial-gradient(
+    circle,
+    var(--line-strong) 1px,
+    transparent 1.5px
+  );
+  background-size: var(--rail-w) 8px;
+  background-position: center top;
 }
 
 .path-progress {
   position: absolute;
-  inset: 0;
-  background: var(--molten);
+  inset: 0 1px;
+  border-radius: 2px;
+  background: var(--nu-accent);
   transform-origin: top center;
   transform: scaleY(0);
-  box-shadow: 0 0 14px rgba(255, 77, 25, 0.6);
 }
 
 .path-item {
   position: relative;
-  padding-left: clamp(1.75rem, 3.5vw, 3rem);
-  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  margin-left: calc(var(--rail-w) + var(--rail-to-tile));
+  padding: var(--tile-pad);
+  background: var(--tile);
+  border: 1px solid var(--line);
+  border-radius: var(--nu-radius);
+  transition: border-color 0.5s var(--ease);
 }
 
-.path-item:last-child {
-  padding-bottom: 0;
+.path-item.is-live {
+  border-color: var(--line-strong);
 }
 
+/* sits on the rail, level with the date row. Offsets are measured from the
+   tile's padding box, hence the extra 1px for its border. */
 .path-dot {
   position: absolute;
-  left: -4px;
-  top: 0.5rem;
-  width: 9px;
-  height: 9px;
+  left: calc(-1 * var(--rail-to-tile) - var(--rail-w) / 2 - 6px - 1px);
+  top: calc(var(--tile-pad) + 0.2rem);
+  width: 12px;
+  height: 12px;
   border-radius: 99px;
-  background: var(--ink-4);
-  border: 1px solid var(--line);
-  transition: background 0.5s var(--ease), box-shadow 0.5s var(--ease),
-    border-color 0.5s var(--ease), transform 0.5s var(--ease);
+  background: var(--nu-black);
+  border: 1px solid var(--line-strong);
+  transition: background 0.5s var(--ease), border-color 0.5s var(--ease),
+    transform 0.5s var(--ease);
 }
 
 .path-item.is-live .path-dot {
-  background: var(--flare);
-  border-color: var(--flare);
-  box-shadow: 0 0 0 4px rgba(255, 77, 25, 0.16), 0 0 16px rgba(255, 77, 25, 0.7);
-  transform: scale(1.15);
+  background: var(--nu-accent);
+  border-color: var(--nu-accent);
+  transform: scale(1.1);
 }
 
 .path-top {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
-  margin-bottom: 0.7rem;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.9rem;
+  margin-bottom: 0.85rem;
 }
 
 .path-when {
-  font-family: var(--font-mono);
+  font-family: var(--nu-font-mono);
   font-size: var(--t-mono);
-  letter-spacing: 0.18em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--tx-mute);
+  color: var(--fg-muted);
 }
 
 .path-kind {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.18em;
+  font-family: var(--nu-font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 0.2rem 0.5rem;
+  padding: 0.22rem 0.6rem;
   border: 1px solid var(--line);
-  border-radius: 3px;
-  color: var(--tx-faint);
+  border-radius: var(--nu-radius-chip);
+  color: var(--fg-muted);
 }
 
 .path-role {
-  font-size: clamp(1.35rem, 2.4vw, 2rem);
-  letter-spacing: -0.04em;
-  line-height: 1.05;
+  font-size: clamp(1.3rem, 2.2vw, 1.85rem);
+  letter-spacing: -0.005em;
+  line-height: 1.12;
 }
 
 .path-org {
   display: inline-block;
-  margin-top: 0.4rem;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.15rem;
-  color: var(--flare);
+  margin-top: 0.45rem;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--fg);
 }
 
 .path-body {
   margin-top: 0.9rem;
   max-width: 62ch;
-  color: var(--tx-mute);
-  line-height: 1.62;
+  color: var(--fg-muted);
+  line-height: 1.65;
 }
 
 @media (max-width: 980px) {

@@ -13,14 +13,14 @@ import { isTouch } from "../../lib/gsap";
 import { usePointerNDC } from "./usePointerNDC";
 
 /* ---------------------------------------------------------------------------
-   The hero centrepiece: a blown-glass knot wrapped around a molten core,
+   The hero centrepiece: a clear-glass knot wrapped around a red core,
    caged by two counter-rotating chrome rings. Replaces the old avatar.
    ------------------------------------------------------------------------- */
 
 // What the transmission pass returns over empty scene. Kept near-black on
 // purpose: the knot's form reads from specular reflection off the
 // lightformers, and a bright value here flattens it into uniform haze.
-const BACKDROP = new THREE.Color("#150b07");
+const BACKDROP = new THREE.Color("#0b0b0c");
 
 function Rings() {
   const a = useRef<THREE.Mesh>(null);
@@ -48,10 +48,10 @@ function Rings() {
       <mesh ref={b} scale={1.12} rotation={[-Math.PI / 3.4, -0.55, 0.3]}>
         <torusGeometry args={[1.55, 0.006, 6, 220]} />
         <meshStandardMaterial
-          color="#ff4d19"
+          color="#e2201f"
           metalness={0.9}
           roughness={0.3}
-          emissive="#ff4d19"
+          emissive="#e2201f"
           emissiveIntensity={0.9}
         />
       </mesh>
@@ -75,8 +75,8 @@ function Core() {
     <mesh ref={ref}>
       <icosahedronGeometry args={[0.62, 1]} />
       <meshStandardMaterial
-        color="#2b0a00"
-        emissive="#ff3d0d"
+        color="#2a0303"
+        emissive="#e2201f"
         // ACES desaturates toward white as intensity climbs — 3.4 rendered
         // the core as a flat cream wedge instead of anything molten.
         emissiveIntensity={1.7}
@@ -140,7 +140,7 @@ function Knot({ lite }: { lite: boolean }) {
           distortionScale={0.3}
           temporalDistortion={0.06}
           color="#ffffff"
-          attenuationColor="#ffb27a"
+          attenuationColor="#f1f0f6"
           attenuationDistance={3}
           envMapIntensity={1.8}
           // What the refraction samples where the scene is empty — without
@@ -205,7 +205,7 @@ const Artifact = () => {
         position={[0, 0, 0]}
         intensity={6}
         distance={5}
-        color="#ff6a2a"
+        color="#e2201f"
       />
 
       {/* scaled back so the knot sits between the two name lines instead of
@@ -225,7 +225,7 @@ const Artifact = () => {
           size={1.6}
           speed={0.28}
           opacity={0.5}
-          color="#ffcaa8"
+          color="#f1f0f6"
         />
       )}
 
@@ -237,7 +237,7 @@ const Artifact = () => {
           intensity={0.7}
           position={[0, 0, -7]}
           scale={[10, 8, 1]}
-          color="#ffd9c0"
+          color="#f1f0f6"
         />
         {/* key light overhead */}
         <Lightformer
@@ -247,28 +247,28 @@ const Artifact = () => {
           scale={[12, 12, 1]}
           color="#ffffff"
         />
-        {/* molten rim, screen-left */}
+        {/* red rim, screen-left */}
         <Lightformer
           intensity={5}
           rotation-y={Math.PI / 2}
           position={[-5, 0.5, -1]}
           scale={[22, 0.7, 1]}
-          color="#ff4d19"
+          color="#e2201f"
         />
         <Lightformer
           intensity={3.4}
           rotation-y={Math.PI / 2}
           position={[-4, -1.5, 0]}
           scale={[18, 0.4, 1]}
-          color="#ffa02e"
+          color="#f1f0f6"
         />
-        {/* cool counter-rim, screen-right — keeps the glass from going muddy */}
+        {/* neutral counter-rim, screen-right — keeps the glass from going muddy */}
         <Lightformer
           intensity={2.2}
           rotation-y={-Math.PI / 2}
           position={[5, 1, 1]}
           scale={[18, 0.9, 1]}
-          color="#9ec2ff"
+          color="#ffffff"
         />
       </Environment>
 

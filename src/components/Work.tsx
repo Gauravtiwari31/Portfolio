@@ -111,7 +111,7 @@ const Work = () => {
           <h2 className="work-head" data-split>
             Things I've
             <br />
-            <em className="serif">actually shipped.</em>
+            <em className="hl">actually shipped.</em>
           </h2>
           <span className="work-count rv">
             {String(projects.length).padStart(2, "0")} projects

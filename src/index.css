@@ -1,53 +1,94 @@
 /* ============================================================================
    GAURAV TIWARI — PORTFOLIO
-   Design system: "MOLTEN"
-   Ink & bone editorial contrast, molten-orange accent, kinetic grotesque type.
+   Design system: "NThing UI"
+   NothingOS-inspired — dot-matrix numerals, a single red accent on black and
+   paper, rounded widget tiles, flat surfaces with hairline borders.
    ========================================================================== */
 
+/* ---- Fonts ----------------------------------------------------------------
+   Ndot 55      dot-matrix display: hero numerals + one phrase per headline
+   Nothing 5x7  small dot-matrix: indices, years, clocks, status text
+   NType 82     grotesk headline: headings, nav, buttons, tile titles
+   NType Mono   raw data: dates, tags, metadata rows
+   Body copy stays on Inter.                                                  */
+
+@font-face {
+  font-family: "Ndot 55";
+  src: url("/fonts/ndot55.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nothing 5x7";
+  src: url("/fonts/nothing_5_7.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NType 82";
+  src: url("/fonts/ntype82_bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NType Mono";
+  src: url("/fonts/ntype_mono.otf") format("opentype");
+  font-display: swap;
+}
+
 :root {
-  /* ---- Surface ---- */
-  --ink: #0b0b0d;
-  --ink-2: #101014;
-  --ink-3: #17171c;
-  --ink-4: #1f1f26;
-  --bone: #efebe3;
-  --bone-2: #ded7c9;
-  --bone-3: #c9c0ae;
+  /* ---- Palette ---- */
+  --nu-accent: #e2201f;
+  --nu-accent-hover: #f04241;
+  --nu-accent-pressed: #c01b1a;
+  --nu-accent-muted: rgba(226, 32, 31, 0.12);
+  --nu-ink: #1b1c1d;
+  --nu-ink-muted: rgba(27, 28, 29, 0.64);
+  --nu-paper: #f1f0f6;
+  --nu-paper-muted: rgba(241, 240, 246, 0.6);
+  --nu-white: #ffffff;
+  --nu-black: #000000;
+  --nu-border-light: rgba(27, 28, 29, 0.1);
+  --nu-border-dark: rgba(241, 240, 246, 0.12);
 
-  /* ---- Accent ---- */
-  --flare: #ff4d19;
-  --ember: #ffa02e;
-  --flare-soft: rgba(255, 77, 25, 0.14);
-  --molten: linear-gradient(100deg, var(--flare) 0%, var(--ember) 100%);
-
-  /* ---- Text on ink ---- */
-  --tx: #f4f1ec;
-  --tx-mute: rgba(244, 241, 236, 0.62);
-  --tx-faint: rgba(244, 241, 236, 0.34);
-  --line: rgba(244, 241, 236, 0.12);
-  --line-soft: rgba(244, 241, 236, 0.06);
-
-  /* ---- Text on bone ---- */
-  --tx-ink: #14141a;
-  --tx-ink-mute: rgba(20, 20, 26, 0.62);
-  --line-ink: rgba(20, 20, 26, 0.14);
+  /* ---- Radius ---- */
+  --nu-radius: 20px;
+  --nu-radius-sm: 14px;
+  --nu-radius-xs: 10px;
+  --nu-radius-chip: 999px;
 
   /* ---- Type ---- */
-  --font-display: "Bricolage Grotesque", "Space Grotesk", sans-serif;
-  --font-serif: "Instrument Serif", Georgia, serif;
-  --font-body: "Space Grotesk", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --nu-font-display: "Ndot 55", ui-monospace, monospace;
+  --nu-font-label: "Nothing 5x7", ui-monospace, monospace;
+  --nu-font-heading: "NType 82", "Inter", system-ui, sans-serif;
+  --nu-font-mono: "NType Mono", ui-monospace, monospace;
+  --nu-font-body: "Inter", system-ui, sans-serif;
 
-  /* fluid scale */
-  --t-mega: clamp(3.2rem, 13vw, 12rem);
-  --t-xl: clamp(2.4rem, 7.2vw, 6.5rem);
-  --t-lg: clamp(1.9rem, 4.4vw, 3.6rem);
-  --t-md: clamp(1.25rem, 2.1vw, 1.75rem);
-  --t-body: clamp(0.98rem, 1.05vw, 1.12rem);
-  --t-mono: clamp(0.66rem, 0.78vw, 0.78rem);
+  /* ---- Contextual surface: dark by default, .sec--paper flips it ---- */
+  --bg: var(--nu-black);
+  --fg: var(--nu-paper);
+  --fg-muted: var(--nu-paper-muted);
+  --fg-faint: rgba(241, 240, 246, 0.4);
+  --line: var(--nu-border-dark);
+  --line-strong: rgba(241, 240, 246, 0.26);
+  --tile: #0b0b0c;
+  --tile-hover: #131315;
+
+  /* ---- Tiles ---- */
+  --tile-pad: clamp(1.25rem, 2.4vw, 2rem);
+  --tile-gap: clamp(1rem, 1.6vw, 1.5rem);
+
+  /* ---- Fluid scale ---- */
+  --t-mega: clamp(3rem, 12.4vw, 11.5rem);
+  --t-xl: clamp(2.2rem, 6.2vw, 5.6rem);
+  --t-lg: clamp(1.85rem, 4.2vw, 3.5rem);
+  --t-body: clamp(0.95rem, 1vw, 1.05rem);
+  --t-label: 0.8125rem; /* NType 82 uppercase labels, 13px */
+  --t-mono: 0.75rem; /* NType Mono metadata, 12px */
 
   /* ---- Layout ---- */
-  --gut: clamp(1.25rem, 4vw, 4.5rem);
+  --gut: clamp(1rem, 4vw, 4.5rem);
   --maxw: 1560px;
   --vh: 100vh;
   --vh: 100svh;
@@ -56,7 +97,7 @@
   --ease-io: cubic-bezier(0.76, 0, 0.24, 1);
 
   color-scheme: dark;
-  font-family: var(--font-body);
+  font-family: var(--nu-font-body);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -76,8 +117,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--ink);
-  color: var(--tx);
+  background: var(--bg);
+  color: var(--fg);
   font-size: var(--t-body);
   line-height: 1.6;
   overflow-x: hidden;
@@ -95,10 +136,10 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-display);
+  font-family: var(--nu-font-heading);
   font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 0.92;
+  letter-spacing: -0.01em;
+  line-height: 1.04;
   margin: 0;
   text-wrap: balance;
 }
@@ -126,9 +167,15 @@ button {
   cursor: pointer;
 }
 
+:focus-visible {
+  outline: 2px solid var(--nu-accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
 ::selection {
-  background: var(--flare);
-  color: #fff;
+  background: var(--nu-accent);
+  color: var(--nu-white);
 }
 
 /* ---- Scrollbar ---- */
@@ -136,14 +183,14 @@ button {
   width: 9px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--ink);
+  background: var(--nu-black);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--ink-4);
+  background: #2a2a2d;
   border-radius: 99px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--flare);
+  background: var(--nu-accent);
 }
 
 /* ============================================================================
@@ -159,101 +206,91 @@ button {
 
 .sec {
   position: relative;
-  padding-block: clamp(5rem, 12vw, 11rem);
+  padding-block: clamp(4.5rem, 11vw, 10rem);
+  background: var(--bg);
 }
 
-.sec--bone {
-  background: var(--bone);
-  color: var(--tx-ink);
+/* light section: flips every contextual token for the tiles inside it */
+.sec--paper {
+  --bg: var(--nu-paper);
+  --fg: var(--nu-ink);
+  --fg-muted: var(--nu-ink-muted);
+  --fg-faint: rgba(27, 28, 29, 0.42);
+  --line: var(--nu-border-light);
+  --line-strong: rgba(27, 28, 29, 0.24);
+  --tile: var(--nu-white);
+  --tile-hover: #fbfbfd;
+  color: var(--fg);
 }
 
-/* mono eyebrow label with index + rule */
+/* section label: 5x7 index, NType title, hairline rule */
 .eyebrow {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
-  font-family: var(--font-mono);
-  font-size: var(--t-mono);
-  font-weight: 400;
-  letter-spacing: 0.24em;
+  gap: 0.85rem;
+  font-family: var(--nu-font-heading);
+  font-weight: 700;
+  font-size: var(--t-label);
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--tx-faint);
+  color: var(--fg-muted);
   margin-bottom: clamp(1.75rem, 4vw, 3rem);
-}
-
-.sec--bone .eyebrow {
-  color: rgba(20, 20, 26, 0.45);
 }
 
 .eyebrow::after {
   content: "";
   flex: 1;
   height: 1px;
-  background: currentColor;
-  opacity: 0.35;
+  background: var(--line);
 }
 
 .eyebrow b {
-  font-weight: 500;
-  color: var(--flare);
-}
-
-/* editorial serif accent inside headlines */
-.serif {
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--nu-font-label);
   font-weight: 400;
-  letter-spacing: -0.01em;
-  text-transform: none;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  color: var(--fg);
 }
 
-.flare {
-  color: var(--flare);
-}
-
-/* outlined display text */
-.hollow {
-  color: transparent;
-  -webkit-text-stroke: 1px var(--tx-faint);
-}
-
-.sec--bone .hollow {
-  -webkit-text-stroke: 1px rgba(20, 20, 26, 0.3);
-}
-
-/* mono meta line */
-.meta {
-  font-family: var(--font-mono);
-  font-size: var(--t-mono);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--tx-faint);
+/* the one dot-matrix phrase per headline */
+.hl {
+  font-family: var(--nu-font-display);
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--nu-accent);
 }
 
 /* chip / tag */
 .chip {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 0.4rem 0.7rem;
+  font-family: var(--nu-font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.02em;
+  padding: 0.4rem 0.8rem;
   border: 1px solid var(--line);
-  border-radius: 99px;
-  color: var(--tx-mute);
+  border-radius: var(--nu-radius-chip);
+  color: var(--fg-muted);
   white-space: nowrap;
   transition: border-color 0.35s var(--ease), color 0.35s var(--ease),
     background 0.35s var(--ease);
 }
 
 .chip:hover {
-  border-color: var(--flare);
-  color: var(--flare);
-  background: var(--flare-soft);
+  border-color: transparent;
+  color: var(--nu-accent);
+  background: var(--nu-accent-muted);
 }
 
-.sec--bone .chip {
-  border-color: var(--line-ink);
-  color: var(--tx-ink-mute);
+/* the Nothing "recording" dot — blinks rather than glows */
+@keyframes nuBlink {
+  0%,
+  55% {
+    opacity: 1;
+  }
+  60%,
+  100% {
+    opacity: 0.2;
+  }
 }
 
 /* ---- GSAP reveal hooks: hidden until the section animation runs ---- */
@@ -264,17 +301,6 @@ button {
 .mask {
   display: block;
   overflow: hidden;
-}
-
-/* film grain + vignette over the whole page */
-.grain {
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  pointer-events: none;
-  opacity: 0.05;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 @media (prefers-reduced-motion: reduce) {

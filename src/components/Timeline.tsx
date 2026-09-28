@@ -50,7 +50,7 @@ const Timeline = () => {
             <h2 className="path-head" data-split>
               The path
               <br />
-              <em className="serif">so far.</em>
+              <em className="hl">so far.</em>
             </h2>
             <p className="path-note rv">
               Two campuses, two industries, and a habit of taking on the

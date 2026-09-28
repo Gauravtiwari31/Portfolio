@@ -13,7 +13,7 @@
   width: 40px;
   height: 40px;
   margin: -20px 0 0 -20px;
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(241, 240, 246, 0.85);
   border-radius: 99px;
   mix-blend-mode: difference;
   display: grid;
@@ -24,20 +24,21 @@
 }
 
 .cur-dot {
-  width: 5px;
-  height: 5px;
-  margin: -2.5px 0 0 -2.5px;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
   border-radius: 99px;
-  background: var(--flare);
+  background: var(--nu-accent);
   transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
 .cur-label {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.14em;
+  font-family: var(--nu-font-heading);
+  font-weight: 700;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--nu-white);
   opacity: 0;
   transition: opacity 0.25s var(--ease);
   white-space: nowrap;
@@ -48,7 +49,7 @@
   width: 74px;
   height: 74px;
   margin: -37px 0 0 -37px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(241, 240, 246, 0.92);
   border-color: transparent;
 }
 
@@ -56,13 +57,13 @@
   width: 108px;
   height: 108px;
   margin: -54px 0 0 -54px;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(241, 240, 246, 0.95);
   border-color: transparent;
 }
 
 .cur-ring[data-mode="view"] .cur-label {
   opacity: 1;
-  color: #000;
+  color: var(--nu-black);
   mix-blend-mode: difference;
 }
 
