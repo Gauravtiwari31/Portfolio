@@ -32,7 +32,7 @@ const Stack = () => {
 
       <div className="shell stack-inner">
         <div className="eyebrow">
-          <b>05</b> <span>Toolkit</span>
+          <b>06</b> <span>Toolkit</span>
         </div>
 
         <div className="stack-head-row">

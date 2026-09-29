@@ -1,0 +1,215 @@
+/* ---- "More builds": a tile grid, then a compact index ---- */
+.builds {
+  margin-top: clamp(5rem, 12vw, 10rem);
+}
+
+.builds-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.builds-title {
+  font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+  letter-spacing: -0.01em;
+}
+
+.builds-count {
+  font-family: var(--nu-font-label);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
+
+.builds-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--tile-gap);
+}
+
+.build {
+  display: flex;
+  flex-direction: column;
+  padding: var(--tile-pad);
+  background: var(--tile);
+  border: 1px solid var(--line);
+  border-radius: var(--nu-radius);
+  transition: border-color 0.45s var(--ease), background 0.45s var(--ease);
+}
+
+.build:hover {
+  background: var(--tile-hover);
+  border-color: var(--line-strong);
+}
+
+.build-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.build-n {
+  font-family: var(--nu-font-label);
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: var(--fg-faint);
+  transition: color 0.4s var(--ease);
+}
+
+.build:hover .build-n {
+  color: var(--nu-accent);
+}
+
+.build-context {
+  font-family: var(--nu-font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--fg-muted);
+}
+
+.build-title {
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  letter-spacing: -0.005em;
+  line-height: 1.12;
+}
+
+.build-kind {
+  margin-top: 0.4rem;
+  font-family: var(--nu-font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.build-summary {
+  margin-top: 0.9rem;
+  font-size: 0.95rem;
+  line-height: 1.62;
+  color: var(--fg-muted);
+}
+
+/* tags left, links right — pinned to the tile's bottom edge */
+.build-foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  margin-top: auto;
+  padding-top: 1.35rem;
+}
+
+.build-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.build-tags .chip {
+  padding: 0.3rem 0.65rem;
+  font-size: 0.7rem;
+}
+
+.build-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.1rem;
+}
+
+.build-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 32px;
+  font-family: var(--nu-font-heading);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg);
+  white-space: nowrap;
+  transition: color 0.35s var(--ease);
+}
+
+.build-links a i {
+  font-style: normal;
+  color: var(--fg-faint);
+  transition: transform 0.4s var(--ease), color 0.35s var(--ease);
+}
+
+.build-links a:hover {
+  color: var(--nu-accent);
+}
+
+.build-links a:hover i {
+  color: var(--nu-accent);
+  transform: translate(2px, -2px);
+}
+
+/* ---- compact index for the smaller pieces ---- */
+.builds-small {
+  list-style: none;
+  margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.builds-small li {
+  display: grid;
+  grid-template-columns: 3rem minmax(10rem, 0.8fr) minmax(0, 2fr) 10rem;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+  padding: 1.05rem 0.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.builds-small li:hover .build-n {
+  color: var(--nu-accent);
+}
+
+.builds-small-title {
+  font-family: var(--nu-font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--fg);
+}
+
+.builds-small-summary {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+}
+
+.builds-small .build-links {
+  justify-content: flex-end;
+}
+
+@media (max-width: 980px) {
+  .builds-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .builds-small li {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+  }
+  .builds-small-summary,
+  .builds-small .build-links {
+    grid-column: 2;
+  }
+  .builds-small .build-links {
+    justify-content: flex-start;
+  }
+}

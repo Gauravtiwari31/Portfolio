@@ -143,6 +143,11 @@
 
 .foot-mid {
   text-align: center;
+  transition: color 0.35s var(--ease);
+}
+
+.foot-mid:hover {
+  color: var(--nu-accent);
 }
 
 .foot-top {

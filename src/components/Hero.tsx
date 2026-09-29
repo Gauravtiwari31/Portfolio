@@ -76,7 +76,7 @@ const Hero = ({ ready }: { ready: boolean }) => {
         <div className="hero-rail hero-rail--top">
           <span>
             <i />
-            {profile.roles[0]}
+            {profile.headline}
           </span>
           <span>
             {profile.location} — {profile.timezone}
@@ -94,9 +94,9 @@ const Hero = ({ ready }: { ready: boolean }) => {
 
         <div className="hero-foot">
           <p className="hero-lede">
-            I build software that has to hold up —{" "}
-            <em className="hl">under load, under attack,</em> and at sixty
-            frames a second.
+            I build backends that have to stay correct —{" "}
+            <em className="hl">immutable ledgers, fail-closed checks</em> and
+            payments that can't charge twice.
           </p>
 
           <div className="hero-actions">
@@ -132,7 +132,7 @@ const Hero = ({ ready }: { ready: boolean }) => {
         </div>
 
         <div className="hero-rail hero-rail--bottom">
-          <span>{profile.roles[1]}</span>
+          <span>{profile.education}</span>
           <span>Est. 2024 — Portfolio 2026</span>
         </div>
       </div>

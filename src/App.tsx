@@ -11,6 +11,7 @@ import About from "./components/About";
 import Capabilities from "./components/Capabilities";
 import Timeline from "./components/Timeline";
 import Work from "./components/Work";
+import Record from "./components/Record";
 import Stack from "./components/Stack";
 import Contact from "./components/Contact";
 
@@ -44,6 +45,7 @@ const App = () => {
         <Capabilities />
         <Timeline />
         <Work />
+        <Record />
         <Stack />
         <Contact />
       </main>

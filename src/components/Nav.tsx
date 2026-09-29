@@ -8,7 +8,9 @@ const LINKS = [
   { id: "capabilities", n: "02", label: "Capabilities" },
   { id: "path", n: "03", label: "Path" },
   { id: "work", n: "04", label: "Work" },
-  { id: "contact", n: "05", label: "Contact" },
+  { id: "record", n: "05", label: "Record" },
+  { id: "stack", n: "06", label: "Toolkit" },
+  { id: "contact", n: "07", label: "Contact" },
 ];
 
 const Nav = ({ ready }: { ready: boolean }) => {
@@ -85,7 +87,7 @@ const Nav = ({ ready }: { ready: boolean }) => {
         <div className="nav-side">
           <span className="nav-status">
             <i className="nav-pulse" />
-            Open to roles
+            Open to internships
           </span>
           <span className="nav-clock">{clock} IST</span>
         </div>

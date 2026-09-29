@@ -10,32 +10,34 @@ const About = () => {
         </div>
 
         <h2 className="about-statement" data-split>
-          Two degrees, three disciplines,
+          Electronics by degree,
           <br />
-          one obsession — making complex
+          backend by choice — I build
           <br />
-          systems <em className="hl">actually behave.</em>
+          systems that <em className="hl">have to be right.</em>
         </h2>
 
         <div className="about-grid">
           <div className="about-copy">
             <p className="rv">
-              I'm an Electronics undergraduate at <b>RGIPT</b> carrying a
-              Computer Science minor at <b>IIT Mandi</b> at the same time —
-              two institutions, one timetable. The software half took over
-              early: algorithms, systems design, and the unglamorous work of
-              making things fast and safe.
+              I'm a third-year Electronics Engineering student at <b>RGIPT</b>{" "}
+              with an online Computer Science minor from <b>IIT Mandi</b>. The
+              software side took over early: I build and deploy services in
+              Python (FastAPI) and TypeScript (Node.js, Next.js) on PostgreSQL
+              and MongoDB.
             </p>
             <p className="rv" data-rv-delay="0.08">
-              Since then I've shipped AI-assisted healthcare platforms, a
-              layered network-security framework, and gameplay systems written
-              to a frame budget. Different domains, same instinct — find where
-              the system strains, then engineer the strain out of it.
+              What I optimise for is correctness — a fare ledger that rejects
+              every UPDATE and DELETE, compliance checks that fail closed,
+              payment webhooks that can't charge twice, and tests written to
+              break things before users can.
             </p>
             <p className="rv" data-rv-delay="0.16">
-              Off the keyboard I co-head the IEEE Student Branch, where I plan
-              technical workshops and drag other people into the same rabbit
-              holes.
+              I've led four hackathon teams, including a rank of{" "}
+              <b>334 among 27,000+ teams</b> at the Amazon ML Challenge 2026.
+              I also co-head the IEEE Student Branch at RGIPT and contribute to
+              open source, with work merged in tldr-pages and caspian-sdk and
+              fixes in review at TypeORM and Meshery.
             </p>
           </div>
 
@@ -55,9 +57,8 @@ const About = () => {
                 Currently
               </span>
               <p>
-                Finishing the CS minor at IIT Mandi while building
-                production systems — and open to full-time engineering roles
-                from mid-2026.
+                Third year at RGIPT, with fixes in review at TypeORM and
+                Meshery — and open to backend and full-stack SDE internships.
               </p>
             </div>
           </div>

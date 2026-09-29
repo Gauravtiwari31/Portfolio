@@ -13,7 +13,7 @@ const Capabilities = () => {
         </div>
 
         <h2 className="cap-head" data-split>
-          Three stacks, <em className="hl">one engineer.</em>
+          Four layers, <em className="hl">one engineer.</em>
         </h2>
 
         <div className="cap-list">

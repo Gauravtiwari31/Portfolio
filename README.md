@@ -1,28 +1,32 @@
 # Gaurav Tiwari — Portfolio
 
-An editorial, WebGL-driven personal site built with React, TypeScript, Three.js and GSAP.
+Personal site of Gaurav Tiwari — backend and distributed systems engineer, B.Tech
+Electronics at RGIPT with a CS minor from IIT Mandi. Built with React, TypeScript,
+Three.js and GSAP.
+
+**Live:** [portfolio-c5yw.vercel.app](https://portfolio-c5yw.vercel.app/)
 
 ![Portfolio Preview](./public/screenshots/Gauravpf.png)
 
 ---
 
-## 🎨 Design — "Molten"
+## 🎨 Design — "NThing UI"
 
-Version 2 is a ground-up redesign. Nothing is shared with the previous build.
+A NothingOS-inspired system: dot-matrix numerals, a single red accent on black
+and paper, and rounded widget tiles with hairline borders.
 
 | | |
 |---|---|
-| **Palette** | Ink `#0B0B0D` · bone `#EFEBE3` · molten orange `#FF4D19 → #FFA02E` |
-| **Display** | Bricolage Grotesque |
-| **Editorial accent** | Instrument Serif (italic) |
-| **Body** | Space Grotesk |
-| **Labels / meta** | JetBrains Mono |
-| **Structure** | Ink and bone sections alternate for hard contrast |
+| **Palette** | Black `#000000` · paper `#F1F0F6` · accent red `#E2201F` |
+| **Display** | Ndot 55 — hero numerals and one phrase per headline |
+| **Headings** | NType 82 |
+| **Labels / meta** | Nothing 5×7 and NType Mono |
+| **Body** | Inter |
+| **Structure** | Black sections with paper sections (About, Record) for contrast |
 
-The centrepiece is a **blown-glass torus knot wrapped around a molten core**,
-caged by two counter-rotating chrome rings — rendered with a transmission
-material against a Lightformer studio environment. The name straddles it:
-`GAURAV` sits behind the glass as an outline, `TIWARI` in front of it, solid.
+The centrepiece is a **blown-glass torus knot wrapped around a glowing core**,
+caged by two counter-rotating chrome rings. The name straddles it: `GAURAV`
+sits behind the glass in dot-matrix, `TIWARI` in front of it, solid.
 
 A second scene drives the toolkit section — a 14k-point grid displaced by
 layered sine waves with a ripple that chases the pointer.
@@ -60,10 +64,12 @@ Scrolling is native — no transform-based smooth-scroll wrapper — so
 │   │   ├── Nav.tsx         # Header, mobile sheet, live IST clock
 │   │   ├── Hero.tsx        # Kinetic name + 3D centrepiece
 │   │   ├── Ticker.tsx      # Scroll-reactive marquee
-│   │   ├── About.tsx       # Bone section, stats, status card
+│   │   ├── About.tsx       # Paper section, stats, status card
 │   │   ├── Capabilities.tsx# Expanding capability rows
 │   │   ├── Timeline.tsx    # Scroll-drawn trajectory rail
-│   │   ├── Work.tsx        # Sticky stacked cards, pointer tilt
+│   │   ├── Work.tsx        # Featured projects: sticky stacked cards, pointer tilt
+│   │   ├── Builds.tsx      # More projects: tile grid + compact index
+│   │   ├── Record.tsx      # Open source, hackathons, achievements
 │   │   ├── Stack.tsx       # Toolkit over the particle field
 │   │   ├── Contact.tsx     # Magnetic email + footer
 │   │   └── Cursor.tsx      # Difference-blend cursor

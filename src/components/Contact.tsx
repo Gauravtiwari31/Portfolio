@@ -46,7 +46,7 @@ const Contact = () => {
 
       <div className="shell">
         <div className="eyebrow">
-          <b>06</b> <span>Contact</span>
+          <b>07</b> <span>Contact</span>
         </div>
 
         <h2 className="contact-head" data-split>
@@ -80,6 +80,7 @@ const Contact = () => {
             </a>
             <span>{profile.location}</span>
             <span>{profile.timezone}</span>
+            <span>{profile.languages}</span>
           </div>
 
           <div className="contact-col rv" data-rv-delay="0.06">
@@ -90,6 +91,12 @@ const Contact = () => {
             <a href={profile.linkedin} target="_blank" rel="noreferrer">
               LinkedIn <i>↗</i>
             </a>
+            <a href={profile.leetcode} target="_blank" rel="noreferrer">
+              LeetCode <i>↗</i>
+            </a>
+            <a href={profile.codechef} target="_blank" rel="noreferrer">
+              CodeChef <i>↗</i>
+            </a>
             <a href={profile.resume} target="_blank" rel="noreferrer">
               Résumé <i>↗</i>
             </a>
@@ -99,9 +106,9 @@ const Contact = () => {
             <h4>Availability</h4>
             <span className="contact-avail">
               <i />
-              Open to full-time roles
+              Open to SDE internships
             </span>
-            <span>From mid-2026</span>
+            <span>Backend · Full-stack · ML</span>
             <span>Remote or relocating</span>
           </div>
         </div>
@@ -110,9 +117,15 @@ const Contact = () => {
       <footer className="foot">
         <div className="shell foot-in">
           <span>© 2026 Gaurav Tiwari</span>
-          <span className="foot-mid">
-            Designed &amp; built from scratch — React, Three.js, GSAP
-          </span>
+          <a
+            className="foot-mid"
+            href={profile.source}
+            target="_blank"
+            rel="noreferrer"
+            data-cursor="link"
+          >
+            Designed &amp; built from scratch — React, Three.js, GSAP ↗
+          </a>
           <button
             className="foot-top"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

@@ -284,7 +284,8 @@
   gap: 1.5rem;
 }
 
-@media (max-width: 1080px) {
+/* seven section links leave no room for the status block below this */
+@media (max-width: 1180px) {
   .nav-side {
     display: none;
   }

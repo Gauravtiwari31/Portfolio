@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 import { gsap, isTouch, prefersReducedMotion } from "../lib/gsap";
 import { projects } from "../data/site";
+import Builds from "./Builds";
 import "./styles/work.css";
 
 const Work = () => {
@@ -114,74 +115,119 @@ const Work = () => {
             <em className="hl">actually shipped.</em>
           </h2>
           <span className="work-count rv">
-            {String(projects.length).padStart(2, "0")} projects
+            {String(projects.length).padStart(2, "0")} featured
           </span>
         </div>
       </div>
 
       <div className="work-stack shell">
-        {projects.map((p, i) => (
-          <article
-            className="work-card"
-            key={p.id}
-            style={{ "--i": i } as React.CSSProperties}
-          >
-            <div className="work-card-in">
-              <div className="work-side">
-                <div className="work-side-top">
-                  <span className="work-id">{p.id}</span>
-                  <span className="work-year">{p.year}</span>
+        {projects.map((p, i) => {
+          const primary = p.links[0];
+          return (
+            <article
+              className="work-card"
+              key={p.id}
+              style={{ "--i": i } as React.CSSProperties}
+            >
+              <div className="work-card-in">
+                <div className="work-side">
+                  <div className="work-side-top">
+                    <span className="work-id">{p.id}</span>
+                    <span className="work-event">{p.event}</span>
+                  </div>
+
+                  <h3 className="work-title">{p.title}</h3>
+                  <span className="work-cat">{p.kind}</span>
+                  <p className="work-context">{p.context}</p>
+                  <p className="work-summary">{p.summary}</p>
+
+                  <div className="work-tags">
+                    {p.stack.map((s) => (
+                      <span className="chip" key={s}>
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="work-links">
+                    {p.links.map((l) => (
+                      <a
+                        key={l.href}
+                        className="work-link"
+                        href={l.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        data-cursor="link"
+                      >
+                        <span>{l.label}</span>
+                        <svg viewBox="0 0 16 16" aria-hidden="true">
+                          <path
+                            d="M4 12L12 4M12 4H6M12 4V10"
+                            stroke="currentColor"
+                            strokeWidth="1.4"
+                            fill="none"
+                          />
+                        </svg>
+                      </a>
+                    ))}
+                  </div>
                 </div>
 
-                <h3 className="work-title">{p.title}</h3>
-                <span className="work-cat">{p.category}</span>
-                <p className="work-summary">{p.summary}</p>
+                <div className="work-media">
+                  <a
+                    className={`work-shot ${p.image ? "" : "work-shot--flow"}`}
+                    href={primary.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    data-cursor="view"
+                    data-label="Open"
+                    aria-label={`${p.title}: ${primary.label}`}
+                  >
+                    {p.image ? (
+                      <img
+                        src={p.image}
+                        alt={`${p.title} interface`}
+                        loading="lazy"
+                      />
+                    ) : (
+                      p.flow && (
+                        <div className="work-flow">
+                          <span className="work-flow-title">{p.flow.title}</span>
+                          <ol className="work-flow-steps">
+                            {p.flow.steps.map((s, k) => (
+                              <li key={s.name}>
+                                <i>{String(k + 1).padStart(2, "0")}</i>
+                                <b>{s.value}</b>
+                                <strong>{s.name}</strong>
+                                <span>{s.label}</span>
+                              </li>
+                            ))}
+                          </ol>
+                          <span className="work-flow-note">{p.flow.note}</span>
+                        </div>
+                      )
+                    )}
+                    <span className="work-shot-frame" aria-hidden="true" />
+                  </a>
 
-                <div className="work-tags">
-                  {p.stack.map((s) => (
-                    <span className="chip" key={s}>
-                      {s}
-                    </span>
-                  ))}
+                  <ul className="work-metrics">
+                    {p.metrics.map((m) => (
+                      <li key={m.label}>
+                        <b>{m.value}</b>
+                        <span>{m.label}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                <a
-                  className="work-link"
-                  href={p.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  data-cursor="link"
-                >
-                  <span>View repository</span>
-                  <svg viewBox="0 0 16 16" aria-hidden="true">
-                    <path
-                      d="M4 12L12 4M12 4H6M12 4V10"
-                      stroke="currentColor"
-                      strokeWidth="1.4"
-                      fill="none"
-                    />
-                  </svg>
-                </a>
+                <span className="work-veil" aria-hidden="true" />
               </div>
-
-              <a
-                className="work-shot"
-                href={p.link}
-                target="_blank"
-                rel="noreferrer"
-                data-cursor="view"
-                data-label="Open"
-                aria-label={`Open ${p.title} on GitHub`}
-              >
-                <img src={p.image} alt={`${p.title} interface`} loading="lazy" />
-                <span className="work-shot-frame" aria-hidden="true" />
-              </a>
-
-              <span className="work-veil" aria-hidden="true" />
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </div>
+
+      <Builds />
     </section>
   );
 };

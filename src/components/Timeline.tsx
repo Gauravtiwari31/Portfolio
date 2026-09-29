@@ -53,8 +53,8 @@ const Timeline = () => {
               <em className="hl">so far.</em>
             </h2>
             <p className="path-note rv">
-              Two campuses, two industries, and a habit of taking on the
-              version of the problem that hasn't been solved yet.
+              Electronics at RGIPT, computer science at IIT Mandi, and an
+              internship spent writing the spec a team built against.
             </p>
           </aside>
 

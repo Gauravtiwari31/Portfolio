@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap, prefersReducedMotion } from "../lib/gsap";
 import "./styles/preloader.css";
 
-const WORDS = ["SYSTEMS", "INTERFACES", "PLAY"];
+const WORDS = ["BACKEND", "SYSTEMS", "DATA"];
 
 const Preloader = ({ onDone }: { onDone: () => void }) => {
   const root = useRef<HTMLDivElement>(null);
